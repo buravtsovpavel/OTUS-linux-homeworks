@@ -20,7 +20,7 @@ Vagrantfile, который сразу собирает систему с под
 ---
 **1. добавить в Vagrantfile еще дисков**
 
-Добавил два диска в [Vagrantfile](ссылка на vagrantfile)
+Добавил два диска в [Vagrantfile](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/RAID/Vagrantfile)
 ```
         :sata5 => {
                         :dfile => './sata5.vdi', 
@@ -35,13 +35,13 @@ Vagrantfile, который сразу собирает систему с под
 ```                
 Сначала сборка упала с ошибкой:
 
-![](1_1)
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/RAID/screenshots/1_1.jpg)
 
 Решилось тем, что создал  /etc/vbox/networks.conf  и дописал в него подесть * 192.168.11.0/24. 
 
 Машина запустилась, диски добавились:
 
-![](1_2)
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/RAID/screenshots/1_2.jpg)
 
 **2. собрать R0/R5/R10 на выбор**
 
@@ -190,18 +190,18 @@ Information: You may need to update /etc/fstab.
 ```
 
 
-![](1_3)
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/RAID/screenshots/1_3.jpg)
 
 
 ---
 
 ## Дополнительное задание
 
-Что бы Vagrantfile сразу собирал систему с подключенным рейдом и смонтированными разделами нужно в разделе box.vm.provision указать скрипт, который выполнится после того, как машина будет развёрнута. 
+Что бы [Vagrantfile](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/RAID/Vagrantfile) сразу собирал систему с подключенным рейдом и смонтированными разделами нужно в разделе box.vm.provision указать [скрипт](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/RAID/raid5-mdadm-fstab.sh), который выполнится после того, как машина будет развёрнута. 
 ```
 box.vm.provision "shell", path: "raid5-mdadm-fstab.sh"
 ```
-В этот скрипт собирал все ранее проделанные команды и добавил строку, которая сделает запись в fstab для автоматического монтирования при перезагрузке:
+В этот [скрипт](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/RAID/raid5-mdadm-fstab.sh) собирал все ранее проделанные команды и добавил строку, которая сделает запись в fstab для автоматического монтирования при перезагрузке:
 ```
 for i in $(seq 1 5); do echo "/dev/md0p$i /raid/part$i ext4    defaults    1 2" | sudo tee -a /etc/fstab; done
 ```
