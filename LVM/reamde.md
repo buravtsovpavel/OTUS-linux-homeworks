@@ -1,5 +1,5 @@
 # Цель домашнего задания
-###Работа с LVM
+### Работа с LVM
 
 
 ---
@@ -19,7 +19,7 @@
 - удалить часть файлов
 - восстановиться со снэпшота (залоггировать работу можно утилитой script, скриншотами и т.п.)
  ---
-###**Уменьшаем том под / до 8 Gb**
+### **Уменьшаем том под / до 8 Gb**
 
 * Сначала проверяем начальную конфигурацию блочных устройств и какие PV, VG и LV уже созданы в системе:
 ```
@@ -177,27 +177,15 @@ done
 - чтобы при загрузке был смонтирован нужный root меняем в файле
 /boot/grub2/grub.cfg  rd.lvm.lv=VolGroup00/LogVol00 на rd.lvm.lv=vg_root/lv_root
 
-(вставить картинку)
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/LVM/screenshots/1_2.jpg)
+
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/LVM/screenshots/1_3.jpg)
+
 
 - выходим из окружения chroot и перезагружаемся новым рут томом. Убеждаемся в этом посмотрев вывод lsblk:
 
-картину вставить
-```
-[vagrant@lvm ~]$ lsblk 
-NAME                    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
-sda                       8:0    0   40G  0 disk 
-├─sda1                    8:1    0    1M  0 part 
-├─sda2                    8:2    0    1G  0 part /boot
-└─sda3                    8:3    0   39G  0 part 
-  ├─VolGroup00-LogVol01 253:1    0  1.5G  0 lvm  [SWAP]
-  └─VolGroup00-LogVol00 253:2    0 37.5G  0 lvm  
-sdb                       8:16   0   10G  0 disk 
-└─vg_root-lv_root       253:0    0   10G  0 lvm  /
-sdc                       8:32   0    2G  0 disk 
-sdd                       8:48   0    1G  0 disk 
-sde                       8:64   0    1G  0 disk 
-[vagrant@lvm ~]$ 
-```
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/LVM/screenshots/1_4.jpg)
+
 
 **Теперь нам нужно изменить размер старой VG и вернуть на него рут. Для этого удаляем старый LV размеров в 40G и создаем новый на 8G:**
 ```
@@ -311,30 +299,9 @@ Writing superblocks and filesystem accounting information: done
 [root@lvm /]# echo "`blkid | grep var: | awk '{print $2}'` /var ext4 defaults 0 0" >> /etc/fstab
 ```
 * Перезагружаемся и удаляем временную Volume Group:
-(вставить скриншот с уменьшенным корнем и зеркалом)
-```
-[vagrant@lvm ~]$ lsblk 
-NAME                     MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
-sda                        8:0    0   40G  0 disk 
-├─sda1                     8:1    0    1M  0 part 
-├─sda2                     8:2    0    1G  0 part /boot
-└─sda3                     8:3    0   39G  0 part 
-  ├─VolGroup00-LogVol00  253:0    0    8G  0 lvm  /
-  └─VolGroup00-LogVol01  253:1    0  1.5G  0 lvm  [SWAP]
-sdb                        8:16   0   10G  0 disk 
-└─vg_root-lv_root        253:2    0   10G  0 lvm  
-sdc                        8:32   0    2G  0 disk 
-├─vg_var-lv_var_rmeta_0  253:3    0    4M  0 lvm  
-│ └─vg_var-lv_var        253:7    0  952M  0 lvm  /var
-└─vg_var-lv_var_rimage_0 253:4    0  952M  0 lvm  
-  └─vg_var-lv_var        253:7    0  952M  0 lvm  /var
-sdd                        8:48   0    1G  0 disk 
-├─vg_var-lv_var_rmeta_1  253:5    0    4M  0 lvm  
-│ └─vg_var-lv_var        253:7    0  952M  0 lvm  /var
-└─vg_var-lv_var_rimage_1 253:6    0  952M  0 lvm  
-  └─vg_var-lv_var        253:7    0  952M  0 lvm  /var
-sde                        8:64   0    1G  0 disk 
-```
+* 
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/LVM/screenshots/1_5.jpg)
+
 ```
 [root@lvm ~]# lvremove /dev/vg_root/lv_root
 Do you really want to remove active logical volume vg_root/lv_root? [y/n]: y
@@ -345,7 +312,7 @@ Do you really want to remove active logical volume vg_root/lv_root? [y/n]: y
   Labels on physical volume "/dev/sdb" successfully wiped.
 [root@lvm ~]# 
 ```
-###**Выделяем том под /home**
+### **Выделяем том под /home**
 * Создаём новый lv, ФС на нём и монтируем в /mnt:
 ```
 [root@lvm ~]# lvcreate -n LogVol_Home -L 2G /dev/VolGroup00
@@ -416,9 +383,9 @@ UUID="fb1ca7f3-d4f1-48f8-afa6-ce49928d3a92" /home xfs defaults 0 0
 [root@lvm ~]# 
 ```
 После всех манипуляций имеем такую конфигурацию блочных устройств:
-СКРИНШОТ
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/LVM/screenshots/1_6.jpg)
 
-###**Работа со снапшотами.**
+### **Работа со снапшотами.**
 * Наполним каталог /home файлами
 ```
 [root@lvm ~]# cp -aR /var/* /home/
@@ -474,6 +441,8 @@ Filesystem                          Size  Used Avail Use% Mounted on
 /dev/mapper/VolGroup00-LogVol_Home  2.0G  204M  1.8G  10% /home
 ```
 
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/LVM/screenshots/1_7.jpg)
+
 * Теперь отмонтируем восстонавливаемый lv и сделаем в него merge снапшота:
 ```
 [root@lvm ~]# umount /home/
@@ -514,3 +483,4 @@ total 8
 Filesystem                          Size  Used Avail Use% Mounted on
 /dev/mapper/VolGroup00-LogVol_Home  2.0G  256M  1.8G  13% /home
 ```
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/LVM/screenshots/1_8.jpg)
