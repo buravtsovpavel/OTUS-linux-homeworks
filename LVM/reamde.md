@@ -262,6 +262,8 @@ sdd                        8:48   0    1G  0 disk
 sde                        8:64   0    1G  0 disk 
 [vagrant@lvm ~]$ 
 ```
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/LVM/screenshots/1_5.jpg)
+
 * Создаем на этом lv ФС ext4 и перемещаем туда /var:
 ```
 [root@lvm /]# mkfs.ext4 /dev/vg_var/lv_var
@@ -319,8 +321,6 @@ Do you really want to remove active logical volume vg_root/lv_root? [y/n]: y
 [root@lvm ~]# ls -l /mnt/
 total 0
 ```
-![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/LVM/screenshots/1_5.jpg)
-
 * Теперь копируем туда содержимое /home, удаляем всё из /home и перемонтируем наш новый том в /home:
 ```
 [root@lvm ~]# cp -aR /home/* /mnt/
