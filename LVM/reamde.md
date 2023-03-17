@@ -225,7 +225,7 @@ done
 [root@lvm /]# cd /boot ; for i in `ls initramfs-*img`; do dracut -v $i `echo $i|sed "s/initramfs-//g;
 > s/.img//g"` --force; done
 ```
-###**Выделим том под /var (/var - делаем в mirror)**
+### **Выделим том под /var (/var - делаем в mirror)**
 * Не перезагружаясь и не выходя из под chroot свободных дисках sdc и sdd создаём зеркало:
 
 ```
@@ -299,8 +299,6 @@ Writing superblocks and filesystem accounting information: done
 [root@lvm /]# echo "`blkid | grep var: | awk '{print $2}'` /var ext4 defaults 0 0" >> /etc/fstab
 ```
 * Перезагружаемся и удаляем временную Volume Group:
-* 
-![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/LVM/screenshots/1_5.jpg)
 
 ```
 [root@lvm ~]# lvremove /dev/vg_root/lv_root
@@ -321,6 +319,8 @@ Do you really want to remove active logical volume vg_root/lv_root? [y/n]: y
 [root@lvm ~]# ls -l /mnt/
 total 0
 ```
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/LVM/screenshots/1_5.jpg)
+
 * Теперь копируем туда содержимое /home, удаляем всё из /home и перемонтируем наш новый том в /home:
 ```
 [root@lvm ~]# cp -aR /home/* /mnt/
