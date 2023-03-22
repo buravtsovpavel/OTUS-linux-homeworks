@@ -85,6 +85,11 @@ otus4       480M  94.5K   480M        -         -     0%     0%  1.00x    ONLINE
     sdi        -      -      -        -         -      -      -      -  ONLINE  
 [root@zfs ~]# 
 ```
+При создании сразу монтируются в корень:
+
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/04-ZFS/screeshots/1_2.jpg?raw=true)
+
+
 какие алгоритмы сжатия поддерживает zfs можно посмотреть в man:
 ```
      compression=on|off|gzip|gzip-N|lz4|lzjb|zle
@@ -346,8 +351,9 @@ https://github.com/sindresorhus/awesome
 [root@zfs ~]# 
 ```
 
-Для конфигурации сервера заносим в отдельный Bash-скрипт команды по установке и настройки ZFS и добавляем его в Vagrantfile.
+Для конфигурации сервера заносим в отдельный [Bash-скрипт](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/04-ZFS/zfs-install.sh) команды по установке и настройки ZFS и добавляем его в [Vagrantfile](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/04-ZFS/Vagrantfile).
 
 ```
 box.vm.provision "shell", path: "zfs-install.sh"
 ```
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/04-ZFS/screeshots/1_3.jpg?raw=true)
