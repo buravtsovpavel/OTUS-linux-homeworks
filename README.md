@@ -5,3 +5,5 @@
 [2. Дисковая подсистема](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/RAID)
 
 [3. Файловые системы и LVM](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/LVM)
+
+[4. Практические навыки работы с ZFS](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/04-ZFS)
