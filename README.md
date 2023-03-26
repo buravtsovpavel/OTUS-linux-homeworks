@@ -7,3 +7,5 @@
 [3. Файловые системы и LVM](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/LVM)
 
 [4. Практические навыки работы с ZFS](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/04-ZFS)
+
+[5. Vagrant стенд для NFS](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/05-NFS)
