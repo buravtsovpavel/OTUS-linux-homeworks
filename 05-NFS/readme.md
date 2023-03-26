@@ -322,7 +322,7 @@ total 0
 
 **5. Создание автоматизированного Vagrantfile**
 
-Что бы vagrant без дополнительных ручных действий сразу собирал сервер NFS и клиента нужно в Vagrantfile указать скрипт для конфигурирования nfs-сервера и скрипт для конфигурирования nfs-клиента, которые выполнятся после того, как машина будет развёрнута. 
+Что бы vagrant без дополнительных ручных действий сразу собирал сервер NFS и клиента нужно в [Vagrantfile](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/05-NFS/Vagrantfile) указать [скрипт](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/05-NFS/nfss_script.sh) для конфигурирования nfs-сервера и [скрипт](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/05-NFS/nfsc_script.sh) для конфигурирования nfs-клиента, которые выполнятся после того, как машина будет развёрнута. 
 ```
 nfss.vm.provision "shell", path: "nfss_script.sh"
 
