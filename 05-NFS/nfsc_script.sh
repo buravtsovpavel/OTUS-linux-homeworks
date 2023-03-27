@@ -14,7 +14,7 @@ systemctl enable nfs --now
 systemctl start nfs-server
 
 # Добавляем монтирование
-echo "192.168.56.10:/srv/share/ /mnt nfs _netdev,vers=3,proto=udp,noauto,x-systemd.automount 0 0" >> /etc/fstab
+echo "192.168.50.10:/srv/share/ /mnt nfs _netdev,vers=3,proto=udp,noauto,x-systemd.automount 0 0" >> /etc/fstab
 
 #mount 192.168.50.10:/srv/share/ /mnt
 
