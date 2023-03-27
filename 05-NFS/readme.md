@@ -152,7 +152,7 @@ Mar 25 10:05:23 nfs-client firewalld[2652]: WARNING: AllowZoneDrifting is enable
 ```
 добавляем в /etc/fstab строку:
 ```
-[root@nfs-client ~]# echo "192.168.56.10:/srv/share/ /mnt nfs vers=3,proto=udp,noauto,x-systemd.automount 0 0" >> /etc/fstab
+[root@nfs-client ~]# echo "192.168.50.10:/srv/share/ /mnt nfs vers=3,proto=udp,noauto,x-systemd.automount 0 0" >> /etc/fstab
 ```
 (в данном случае происходит автоматическая генерация systemd units в каталоге `/run/systemd/generator/`, которые производят монтирование при первом обращении к катаmcлогу `/mnt/`)
 
