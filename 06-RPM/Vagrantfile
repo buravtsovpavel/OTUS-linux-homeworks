@@ -63,16 +63,11 @@ baseurl=http://localhost/repo
 gpgcheck=0
 enabled=1
 EOF
-      
-      sudo yum repolist enabled | grep otus
-      sudo yum list | grep otus
-      
+
+     
       sudo yum install epel-release -y
       sudo yum install jq oniguruma -y
       sudo yum install percona-orchestrator.x86_64 -y
-
-
-
 
       SHELL
  
