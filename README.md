@@ -9,3 +9,5 @@
 [4. Практические навыки работы с ZFS](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/04-ZFS)
 
 [5. Vagrant стенд для NFS](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/05-NFS)
+
+[6. Размещаем свой RPM в своем репозитории](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/06-RPM)
