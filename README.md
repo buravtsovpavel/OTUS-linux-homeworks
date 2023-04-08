@@ -11,3 +11,5 @@
 [5. Vagrant стенд для NFS](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/05-NFS)
 
 [6. Размещаем свой RPM в своем репозитории](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/06-RPM)
+
+[7. Работа с загрузчиком](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/07-boot-grub2)
