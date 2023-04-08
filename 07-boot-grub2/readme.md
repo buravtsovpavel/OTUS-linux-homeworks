@@ -1,5 +1,5 @@
 
-### Домашнее задание  
+## Домашнее задание  
 
 #### Работа с загрузчиком
 
@@ -11,9 +11,7 @@
 * Попасть в систему без пароля несколькими способами.
 * Установить систему с LVM, после чего переименовать VG.
 * Добавить модуль в initrd.
-* 4(*). Сконфигурировать систему без отдельного раздела с /boot, а только с LVM
-Репозиторий с пропатченым grub: https://yum.rumyantsev.com/centos/7/x86_64/
-PV необходимо инициализировать с параметром --bootloaderareasize 1m
+
 
 
 **1. Попасть в систему без пароля несколькими способами.**
@@ -27,6 +25,9 @@ PV необходимо инициализировать с параметром
 В конце строки начинающейся с linux16 добавляем init=/bin/sh, убираем параметры console=tty0 console=ttyS0,115200n8 и нажимаем сtrl-x для загрузки в систему. 
 (В этом способе мы оказываемся в корневой файловой системе.) 
 Но рутовая файловая система при этом монтируется в режиме Read-Only. 
+
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/07-boot-grub2/screenshots/1_1.jpg)
+
 Если мы хотим перемонтировать её в режим Read-Write можно воспользоваться командой:
 
 **mount -o remount,rw /**
@@ -35,12 +36,17 @@ PV необходимо инициализировать с параметром
 
 (после этого необходимо обновить контекст SELINUX - создаём файл touch /.autorelabel для обновления меток, иначе не получится залогиниться.)
 
-картинки
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/07-boot-grub2/screenshots/1_2.jpg)
+
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/07-boot-grub2/screenshots/1_3.jpg)
+
 
 **Способ 2. rd.break**
 
 В конце строки начинающейся с linux16 добавляем rd.break rd.break enforcing=0, убираем параметры console=tty0 console=ttyS0,115200n8 и нажимаем сtrl-x для загрузки в систему. 
 (enforcing=0 загрузка SELinux в permissive режиме)
+
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/07-boot-grub2/screenshots/rd.jpg)
 
 Попадаем в **emergency mode**. Наша корневая файловая система смонтирована в режиме Read-Only, но мы не в ней. Что бы попасть в неё и поменять пароль администратора:
 
@@ -56,7 +62,8 @@ chroot /sysroot
 
 passwd
 
-картинки
+
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/07-boot-grub2/screenshots/rd_3.jpg)
 
 
 
@@ -65,10 +72,12 @@ passwd
 В строке начинающейся с linux16 заменяем ro на rw init=/sysroot/bin/sh и нажимаем сtrl-x
 для загрузки в систему
 
-картинка
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/07-boot-grub2/screenshots/1_3_2.jpg)
 
 Так же как в предыдущем способе попадаем в emergency mode. Но файловая система сразу
 смонтирована в режим Read-Write.  (В прошлых примерах тоже можно заменить ro на rw)
+
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/07-boot-grub2/screenshots/1_3_4%20!%203%20%D1%81%D0%BF%D0%BE%D1%81%D0%BE%D0%B1.jpg)
 
 
 **2. Установить систему с LVM, после чего переименовать VG.**
