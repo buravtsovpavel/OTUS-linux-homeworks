@@ -43,7 +43,7 @@
 
 **Способ 2. rd.break**
 
-В конце строки начинающейся с linux16 добавляем rd.break rd.break enforcing=0, убираем параметры console=tty0 console=ttyS0,115200n8 и нажимаем сtrl-x для загрузки в систему. 
+В конце строки начинающейся с linux16 добавляем rd.break enforcing=0, убираем параметры console=tty0 console=ttyS0,115200n8 и нажимаем сtrl-x для загрузки в систему. 
 (enforcing=0 загрузка SELinux в permissive режиме)
 
 ![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/07-boot-grub2/screenshots/rd.jpg)
