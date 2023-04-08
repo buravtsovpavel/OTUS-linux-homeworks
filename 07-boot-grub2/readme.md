@@ -50,15 +50,15 @@
 
 Попадаем в **emergency mode**. Наша корневая файловая система смонтирована в режиме Read-Only, но мы не в ней. Что бы попасть в неё и поменять пароль администратора:
 
-перемонтируем файловую систему с возможностью записи
+* перемонтируем файловую систему с возможностью записи:
 
 mount -o remount,rw /sysroot 
 
-измененяем корневую файловую систему
+* измененяем корневую файловую систему:
 
 chroot /sysroot
 
-изменяем пароль суперпользователя
+* изменяем пароль суперпользователя:
 
 passwd
 
@@ -70,7 +70,7 @@ passwd
 **Способ 3. rw init=/sysroot/bin/sh**
 
 В строке начинающейся с linux16 заменяем ro на rw init=/sysroot/bin/sh и нажимаем сtrl-x
-для загрузки в систему
+для загрузки в систему:
 
 ![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/07-boot-grub2/screenshots/1_3_2.jpg)
 
@@ -97,7 +97,7 @@ passwd
   Volume group "VolGroup00" successfully renamed to "OtusRoot"
 ```
 Далее правим /etc/fstab, /etc/default/grub, /boot/grub2/grub.cfg. Везде заменяем старое
-название на новое. 
+название на новое: 
 
 ```
 [root@systemboot ~]# sed -i 's/VolGroup00/OtusRoot/g' /etc/fstab
@@ -106,9 +106,12 @@ passwd
 
 [root@systemboot ~]# sed -i 's/VolGroup00/OtusRoot/g' /boot/grub2/grub.cfg
 ```
-вставить скриншоты
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/07-boot-grub2/screenshots/2_3(%D1%81%D1%82%D0%B0%D0%BB%D0%BE).jpg)
 
-Пересоздаем initrd image, чтобы он знал новое название Volume Group
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/07-boot-grub2/screenshots/2_5(%D1%81%D1%82%D0%B0%D0%BB%D0%BE).jpg)
+
+
+Пересоздаем initrd image, чтобы он знал новое название Volume Group:
 
 ```
 [root@systemboot ~]# mkinitrd -f -v /boot/initramfs-$(uname -r).img $(uname -r)
@@ -120,7 +123,7 @@ passwd
 *** Creating image file done ***
 *** Creating initramfs image file '/boot/initramfs-3.10.0-862.2.3.el7.x86_64.img' done ***
 ```
-Перезагружаемся и проверяем новое имя Volume Group
+Перезагружаемся и проверяем новое имя Volume Group:
 
 ```
 [root@systemboot ~]# vgs
@@ -139,8 +142,8 @@ passwd
 ```
 В нее поместим два скрипта:
 
-1. module-setup.sh - который устанавливает модуль и вызывает скрипт test.sh
-2. test.sh - собственно сам вызываемый скрипт, в нём у нас рисуется пингвинчик
+1. ![module-setup.sh](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/07-boot-grub2/module-setup.sh) - который устанавливает модуль и вызывает скрипт test.sh
+2. ![test.sh](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/07-boot-grub2/test.sh) - собственно сам вызываемый скрипт, в нём у нас рисуется пингвинчик
 
 Пересобираем образ initrd
 
@@ -183,7 +186,7 @@ test
 Перезагружаемся и при загрузке во время  пауза на 10 секунд можно увидеть пингвина в выводе
 терминала
 
-картинка
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/07-boot-grub2/screenshots/3_2.jpg)
 
 
 
