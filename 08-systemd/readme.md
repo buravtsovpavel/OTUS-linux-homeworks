@@ -1,4 +1,4 @@
-##Домашнее задание
+## Домашнее задание
 
 **Systemd - создание unit-файла**
 
@@ -6,7 +6,7 @@
 
 ---
 
-####Описание домашнего задания Выполнить следующие задания и подготовить развёртывание результата выполнения с использованием Vagrant и Vagrant shell provisioner (или Ansible, на Ваше усмотрение):
+#### Описание домашнего задания Выполнить следующие задания и подготовить развёртывание результата выполнения с использованием Vagrant и Vagrant shell provisioner (или Ansible, на Ваше усмотрение):
 
 1. Написать service, который будет раз в 30 секунд мониторить лог на предмет наличия ключевого слова (файл лога и ключевое слово должны задаваться в /etc/sysconfig или в /etc/default).
 2. Установить spawn-fcgi и переписать init-скрипт на unit-файл (имя service должно называться так же: spawn-fcgi).
@@ -222,7 +222,7 @@ Apr 12 16:25:17 systemd systemd[1]: Starting Spawn-fcgi startup service by Otus.
 [root@systemd ~]# 
 ```
 
-**3\.Дополнить unit-файл httpd (он же apache2) возможностью запустить несколько инстансов сервера с разными конфигурационными файлами.**
+**3\. Дополнить unit-файл httpd (он же apache2) возможностью запустить несколько инстансов сервера с разными конфигурационными файлами.**
 
 * Для запуска нескольких экземпляров сервиса будем использовать шаблон в
 конфигурации файла окружения (/usr/lib/systemd/system/httpd.service ):
@@ -339,53 +339,10 @@ tcp    LISTEN     0      128      :::80                   :::*                  
 [root@systemd ~]# 
 ```
 
-```
-[root@systemd ~]# systemctl status httpd@first.service 
-● httpd@first.service - The Apache HTTP Server
-   Loaded: loaded (/usr/lib/systemd/system/httpd@.service; disabled; vendor preset: disabled)
-   Active: active (running) since Thu 2023-04-13 15:31:11 UTC; 7min ago
-     Docs: man:httpd(8)
-           man:apachectl(8)
- Main PID: 1620 (httpd)
-   Status: "Total requests: 0; Current requests/sec: 0; Current traffic:   0 B/sec"
-   CGroup: /system.slice/system-httpd.slice/httpd@first.service
-           ├─1620 /usr/sbin/httpd -f conf/first.conf -DFOREGROUND
-           ├─1621 /usr/sbin/httpd -f conf/first.conf -DFOREGROUND
-           ├─1622 /usr/sbin/httpd -f conf/first.conf -DFOREGROUND
-           ├─1623 /usr/sbin/httpd -f conf/first.conf -DFOREGROUND
-           ├─1624 /usr/sbin/httpd -f conf/first.conf -DFOREGROUND
-           ├─1625 /usr/sbin/httpd -f conf/first.conf -DFOREGROUND
-           └─1626 /usr/sbin/httpd -f conf/first.conf -DFOREGROUND
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/08-systemd/screenshots/3_3.jpg)
 
-Apr 13 15:31:11 systemd systemd[1]: Starting The Apache HTTP Server...
-Apr 13 15:31:11 systemd httpd[1620]: AH00558: httpd: Could not reliably determine the server's fully qualified domain...essage
-Apr 13 15:31:11 systemd systemd[1]: Started The Apache HTTP Server.
-Hint: Some lines were ellipsized, use -l to show in full.
-[root@systemd ~]# systemctl status httpd@second.service 
-● httpd@second.service - The Apache HTTP Server
-   Loaded: loaded (/usr/lib/systemd/system/httpd@.service; disabled; vendor preset: disabled)
-   Active: active (running) since Thu 2023-04-13 15:31:20 UTC; 7min ago
-     Docs: man:httpd(8)
-           man:apachectl(8)
- Main PID: 1633 (httpd)
-   Status: "Total requests: 0; Current requests/sec: 0; Current traffic:   0 B/sec"
-   CGroup: /system.slice/system-httpd.slice/httpd@second.service
-           ├─1633 /usr/sbin/httpd -f conf/second.conf -DFOREGROUND
-           ├─1634 /usr/sbin/httpd -f conf/second.conf -DFOREGROUND
-           ├─1635 /usr/sbin/httpd -f conf/second.conf -DFOREGROUND
-           ├─1636 /usr/sbin/httpd -f conf/second.conf -DFOREGROUND
-           ├─1637 /usr/sbin/httpd -f conf/second.conf -DFOREGROUND
-           ├─1638 /usr/sbin/httpd -f conf/second.conf -DFOREGROUND
-           └─1639 /usr/sbin/httpd -f conf/second.conf -DFOREGROUND
-
-Apr 13 15:31:20 systemd systemd[1]: Starting The Apache HTTP Server...
-Apr 13 15:31:20 systemd httpd[1633]: AH00558: httpd: Could not reliably determine the server's fully qualified domain...essage
-Apr 13 15:31:20 systemd systemd[1]: Started The Apache HTTP Server.
-Hint: Some lines were ellipsized, use -l to show in full.
-[root@systemd ~]# 
-```
 
 **4. Развёртывание результата выполнения с использованием Vagrant и Vagrant shell provisioner**
 
-Развёртываем 3 скритпами  task1-watchlog-timer.sh  task1-watchlog-timer.sh task3-httpd.sh с помощью Vagrantfile, vagrant shell.
+Развёртываем 3 скритпами  [task1-watchlog-timer.sh](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/08-systemd/task1-watchlog-timer.sh)  [ask1-watchlog-timer.sh](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/08-systemd/task2-spawn-fcgi-service.sh) [task3-httpd.sh](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/08-systemd/task3-httpd.sh) с помощью [Vagrantfile](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/08-systemd/Vagrantfile), vagrant shell.
 
