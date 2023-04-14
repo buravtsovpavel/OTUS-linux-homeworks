@@ -345,5 +345,5 @@ tcp    LISTEN     0      128      :::80                   :::*                  
 
 **4. Развёртывание результата выполнения с использованием Vagrant и Vagrant shell provisioner**
 
-Развёртываем 3 скритпами  [task1-watchlog-timer.sh](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/08-systemd/task1-watchlog-timer.sh)  [ask1-watchlog-timer.sh](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/08-systemd/task2-spawn-fcgi-service.sh) [task3-httpd.sh](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/08-systemd/task3-httpd.sh) с помощью [Vagrantfile](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/08-systemd/Vagrantfile), vagrant shell.
+Развёртываем 3 скритпами  [task1-watchlog-timer.sh](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/08-systemd/task1-watchlog-timer.sh)  [task2-spawn-fcgi-service.sh](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/08-systemd/task2-spawn-fcgi-service.sh) [task3-httpd.sh](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/08-systemd/task3-httpd.sh) с помощью [Vagrantfile](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/08-systemd/Vagrantfile), vagrant shell.
 
