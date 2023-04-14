@@ -290,12 +290,6 @@ WantedBy=multi-user.target
 ```
 
 * В самом файле окружения (которых будет два) задается опция для запуска веб-сервера с необходимым конфигурационным файлом:
-(# /etc/sysconfig/httpd-first
-OPTIONS=-f conf/first.conf  
-
-# /etc/sysconfig/httpd-second
-OPTIONS=-f conf/second.conf)
-
 
 ```
 [root@systemd ~]# cp /etc/sysconfig/httpd  /etc/sysconfig/httpd-first
@@ -310,6 +304,7 @@ OPTIONS=-f conf/second.conf)
 [root@systemd ~]# sed -i "s/#OPTIONS=/OPTIONS=-f conf\/second.conf/"    /etc/sysconfig/httpd-second
 [root@systemd ~]# 
 ```
+
 * Соответственно в директории с конфигами httpd (/etc/httpd/conf)
 должны лежать два конфига, в нашем случае это будут first.conf и second.conf
 
