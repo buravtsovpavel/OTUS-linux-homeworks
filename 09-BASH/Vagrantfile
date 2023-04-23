@@ -1,0 +1,35 @@
+# -*- mode: ruby -*-
+# vim: set ft=ruby :
+
+servers = {
+    :bash => {
+        :box_name => "centos/7",
+        :cpus => 2,
+        :memory => 1024,
+    },
+}
+
+Vagrant.configure("2") do |config|
+    #config.vm.box_version = "1804.02"
+
+    
+    config.vm.synced_folder ".", "/vagrant"
+    
+    servers.each do |boxname, boxconfig|
+      config.vm.define boxname do |box|
+          box.vm.box = boxconfig[:box_name]
+          box.vm.host_name = boxname.to_s 
+         
+          box.vm.network "private_network", ip: "192.168.11.125"
+         
+          box.vm.provider :virtualbox do |vb|
+            vb.memory = boxconfig[:memory]
+            vb.cpus = boxconfig[:cpus] 	        
+          end
+
+          box.vm.provision "shell", path: "provision.sh"          
+          box.vm.provision "shell", path: "access-log-parse.sh"          
+          
+      end
+  end
+end
