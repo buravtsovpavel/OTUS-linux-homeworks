@@ -15,3 +15,5 @@
 [7. Работа с загрузчиком](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/07-boot-grub2)
 
 [8. Systemd - создание unit-файла](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/08-systemd)
+
+[9. bash grep sed awk](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/09-BASH)
