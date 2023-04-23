@@ -31,37 +31,37 @@ if ( set -o noclobber; echo "$$" > "$lockfile") 2> /dev/null; then
       let "n=($line_counter_current - $line_counter)"
       echo "С момента последнего запуска скрипта с $last_running_date по $current_date" >> $message_mail
       echo "было дописано $n строк" >> $message_mail
-	    echo "----------------------------------------------------------------------------------" >> $message_mail
+      echo "----------------------------------------------------------------------------------" >> $message_mail
 
       echo "IP адреса с наибольшим кол-вом запросов: " >> $message_mail
       tail -$n $accesslog | awk '{print $1}' | sort | uniq -c | sort -rn | head -n 10 >> $message_mail
 
       echo "Список запрашиваемых URL с наибольшим кол-вом запросов: " >> $message_mail
-	    tail -$n $accesslog | awk '{print $7}' | sort | uniq -c | sort -rn | head -n 10 >> $message_mail
+      tail -$n $accesslog | awk '{print $7}' | sort | uniq -c | sort -rn | head -n 10 >> $message_mail
       	   
       echo "Все ошибки со стороны клиента/сервера с  момента последнего запуска: " >> $message_mail
-	    tail -$n $accesslog | awk '{print $9}' | grep -E  '^(4|5)([0-9][0-9])' | sort | uniq -c | sort -nr >> $message_mail
+      tail -$n $accesslog | awk '{print $9}' | grep -E  '^(4|5)([0-9][0-9])' | sort | uniq -c | sort -nr >> $message_mail
 	
-	    echo "Список всех кодов возврата с указанием их кол-ва с момента последнего запуска:" >> $message_mail
+      echo "Список всех кодов возврата с указанием их кол-ва с момента последнего запуска:" >> $message_mail
       tail -$n $accesslog | awk '{print $9}' | grep -E '[0-9]{3}' | sort | uniq -c | sort -rn >> $message_mail
 
     # анализ файла уменьшенного лога (всего) 
     else   
            	
-	    echo "С момента последнего запуска скрипта лога с $last_running_date по $current_date лог был перезаписан" >> $message_mail
-	    echo "----------------------------------------------------------------------------------" >> $message_mail
+      echo "С момента последнего запуска скрипта лога с $last_running_date по $current_date лог был перезаписан" >> $message_mail
+      echo "----------------------------------------------------------------------------------" >> $message_mail
     
       echo "IP адреса с наибольшим кол-вом запросов: " >> $message_mail
-	    cat $accesslog | awk '{print $1}' | sort | uniq -c | sort -rn | head -n 10 >> $message_mail
+      cat $accesslog | awk '{print $1}' | sort | uniq -c | sort -rn | head -n 10 >> $message_mail
  	
       echo "Список запрашиваемых URL с наибольшим кол-вом запросов: " >> $message_mail
-	    cat $accesslog | awk '{print $7}' | sort | uniq -c | sort -rn | head -n 10 >> $message_mail
+      cat $accesslog | awk '{print $7}' | sort | uniq -c | sort -rn | head -n 10 >> $message_mail
     
       echo "Все ошибки со стороны клиента/сервера с  момента последнего запуска: " >> $message_mail
-	    cat $accesslog | awk '{print $9}' | grep -E  '^(4|5)([0-9][0-9])' | sort | uniq -c | sort -nr >> $message_mail
+      cat $accesslog | awk '{print $9}' | grep -E  '^(4|5)([0-9][0-9])' | sort | uniq -c | sort -nr >> $message_mail
 		       
       echo "Список всех кодов возврата с указанием их кол-ва с момента последнего запуска:" >> $message_mail
-	    cat $accesslog | awk '{print $9}'| grep -E '[0-9]{3}' | sort | uniq -c | sort -rn >> $message_mail
+      cat $accesslog | awk '{print $9}'| grep -E '[0-9]{3}' | sort | uniq -c | sort -rn >> $message_mail
     
     fi       
       
