@@ -40,4 +40,4 @@ sudo echo "* * * * * root /vagrant/access-log-parse.sh" > /etc/crontab
 
 Для выполнения раз в час 
 
-sudo echo 0 * * * * root /vagrant/access-log-parse.sh" > /etc/crontab
+sudo echo "0 * * * * root /vagrant/access-log-parse.sh" > /etc/crontab
