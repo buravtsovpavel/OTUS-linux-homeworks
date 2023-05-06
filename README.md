@@ -17,3 +17,5 @@
 [8. Systemd - создание unit-файла](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/08-systemd)
 
 [9. bash grep sed awk](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/09-BASH)
+
+[11. Ansible](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/11-Ansible)
