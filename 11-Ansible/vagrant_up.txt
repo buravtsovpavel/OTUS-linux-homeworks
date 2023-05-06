@@ -1,0 +1,117 @@
+buravtsovps@otus:~/work-dir/Ansible$ vagrant up 
+Bringing machine 'vm1' up with 'virtualbox' provider...
+Bringing machine 'vm2' up with 'virtualbox' provider...
+==> vm1: Importing base box 'centos/7'...
+==> vm1: Matching MAC address for NAT networking...
+==> vm1: Checking if box 'centos/7' version '2004.01' is up to date...
+==> vm1: Setting the name of the VM: Ansible_vm1_1683359652690_14272
+==> vm1: Clearing any previously set network interfaces...
+==> vm1: Preparing network interfaces based on configuration...
+    vm1: Adapter 1: nat
+    vm1: Adapter 2: hostonly
+==> vm1: Forwarding ports...
+    vm1: 22 (guest) => 2222 (host) (adapter 1)
+==> vm1: Running 'pre-boot' VM customizations...
+==> vm1: Booting VM...
+==> vm1: Waiting for machine to boot. This may take a few minutes...
+    vm1: SSH address: 127.0.0.1:2222
+    vm1: SSH username: vagrant
+    vm1: SSH auth method: private key
+    vm1: Warning: Connection reset. Retrying...
+==> vm1: Machine booted and ready!
+==> vm1: Checking for guest additions in VM...
+    vm1: No guest additions were detected on the base box for this VM! Guest
+    vm1: additions are required for forwarded ports, shared folders, host only
+    vm1: networking, and more. If SSH fails on this machine, please install
+    vm1: the guest additions and repackage the box to continue.
+    vm1: 
+    vm1: This is not an error message; everything may continue to work properly,
+    vm1: in which case you may ignore this message.
+==> vm1: Configuring and enabling network interfaces...
+==> vm1: Rsyncing folder: /home/buravtsovps/work-dir/Ansible/ => /vagrant
+==> vm2: Importing base box 'ubuntu/focal64'...
+==> vm2: Matching MAC address for NAT networking...
+==> vm2: Checking if box 'ubuntu/focal64' version '20230215.0.0' is up to date...
+==> vm2: Setting the name of the VM: Ansible_vm2_1683359726312_46604
+==> vm2: Fixed port collision for 22 => 2222. Now on port 2200.
+==> vm2: Clearing any previously set network interfaces...
+==> vm2: Preparing network interfaces based on configuration...
+    vm2: Adapter 1: nat
+    vm2: Adapter 2: hostonly
+==> vm2: Forwarding ports...
+    vm2: 22 (guest) => 2200 (host) (adapter 1)
+==> vm2: Running 'pre-boot' VM customizations...
+==> vm2: Booting VM...
+==> vm2: Waiting for machine to boot. This may take a few minutes...
+    vm2: SSH address: 127.0.0.1:2200
+    vm2: SSH username: vagrant
+    vm2: SSH auth method: private key
+    vm2: Warning: Connection reset. Retrying...
+    vm2: Warning: Remote connection disconnect. Retrying...
+    vm2: Warning: Connection reset. Retrying...
+==> vm2: Machine booted and ready!
+==> vm2: Checking for guest additions in VM...
+    vm2: The guest additions on this VM do not match the installed version of
+    vm2: VirtualBox! In most cases this is fine, but in rare cases it can
+    vm2: prevent things such as shared folders from working properly. If you see
+    vm2: shared folder errors, please make sure the guest additions within the
+    vm2: virtual machine match the version of VirtualBox you have installed on
+    vm2: your host and reload your VM.
+    vm2: 
+    vm2: Guest Additions Version: 6.1.38
+    vm2: VirtualBox Version: 7.0
+==> vm2: Setting hostname...
+==> vm2: Configuring and enabling network interfaces...
+==> vm2: Mounting shared folders...
+    vm2: /vagrant => /home/buravtsovps/work-dir/Ansible
+==> vm2: Running provisioner: ansible...
+    vm2: Running ansible-playbook...
+
+PLAY [NGINX | Install and configure NGINX] *************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [vm1]
+ok: [vm2]
+
+TASK [Chek and print linux os_family] ******************************************
+ok: [vm1] => {
+    "ansible_os_family": "RedHat"
+}
+ok: [vm2] => {
+    "ansible_os_family": "Debian"
+}
+
+TASK [NGINX | Install EPEL Repo package from standart repo] ********************
+skipping: [vm2]
+changed: [vm1]
+
+TASK [NGINX | Install NGINX package from EPEL Repo] ****************************
+skipping: [vm2]
+changed: [vm1]
+
+TASK [Update Repository cache] *************************************************
+skipping: [vm1]
+changed: [vm2]
+
+TASK [NGINX | Install NGINX package] *******************************************
+skipping: [vm1]
+changed: [vm2]
+
+TASK [NGINX | Create NGINX config file from template] **************************
+changed: [vm2]
+changed: [vm1]
+
+RUNNING HANDLER [restart nginx] ************************************************
+changed: [vm2]
+changed: [vm1]
+
+RUNNING HANDLER [reload nginx] *************************************************
+changed: [vm2]
+changed: [vm1]
+
+PLAY RECAP *********************************************************************
+vm1                        : ok=7    changed=5    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+vm2                        : ok=7    changed=5    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0   
+
+buravtsovps@otus:~/work-dir/Ansible$ 
+

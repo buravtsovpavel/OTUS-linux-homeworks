@@ -1,0 +1,78 @@
+---
+- name: NGINX | Install and configure NGINX
+  hosts: all
+  become: true
+  vars:
+    nginx_listen_port: 8080
+
+  tasks:
+
+    - name: Chek and print linux os_family
+      debug: var=ansible_os_family
+ 
+    - block:  # Block for CentOS
+
+        - name: NGINX | Install EPEL Repo package from standart repo
+          yum:
+           name: epel-release
+           state: present
+          
+          tags:
+          - epel-package
+          - packages
+
+        - name: NGINX | Install NGINX package from EPEL Repo
+          yum:
+           name: nginx
+           state: latest
+          notify:
+            - restart nginx
+          tags:
+            - nginx-package
+            - packages
+
+      when: ansible_os_family == "RedHat"  
+
+
+    - block:  # Block for Ubuntu
+
+        - name: "Update Repository cache"
+          apt:
+           update_cache: true
+           cache_valid_time: 3600
+           force_apt_get: true
+
+        - name: NGINX | Install NGINX package 
+          apt:
+           name: nginx
+           state: latest
+          notify:
+          - restart nginx
+          tags:
+          - nginx-package
+          - packages
+
+      when: ansible_os_family == "Debian"  
+
+      
+    - name: NGINX | Create NGINX config file from template
+      template:
+        src: templates/nginx.conf.j2
+        dest: /etc/nginx/nginx.conf
+      notify:
+       - reload nginx
+      tags:
+       - nginx-configuration
+      
+      
+  handlers:
+   - name:  restart nginx
+     systemd:
+      name: nginx
+      state: restarted
+      enabled: yes
+    
+   - name: reload nginx
+     systemd:
+      name: nginx
+      state: reloaded
