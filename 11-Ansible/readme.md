@@ -14,10 +14,10 @@
 
 
 ---
-Для разнообразия в стенд на Vagrant добавил 2 машины из разных семейств (Centos и Ubuntu) для группировки заданий в блоки.
-nginx_install.yml разворачивает nginx используя yum/apt используя конфигурационный файл из шаблона jinja2 и notify для старта nginx после установки.
+Для разнообразия в [стенд на Vagrant](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/11-Ansible/Vagrantfile) добавил 2 машины из разных семейств (Centos и Ubuntu) для группировки заданий в блоки.
+[nginx_install.yml](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/11-Ansible/nginx_install.yml) разворачивает nginx используя yum/apt используя [конфигурационный файл из шаблона jinja2](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/11-Ansible/templates/nginx.conf.j2) и notify для старта nginx после установки.
 После развёртывания сайт на обоих машинах слушается на нестандартном порту 8080.
-Роль, которая делает всё это.
+[Роль](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/11-Ansible/roles/nginx_install), которая делает всё это.
 
 ```
 buravtsovps@otus:~/work-dir/Ansible$ ansible all -i inventory.ini -m command -a "cat /etc/os-release"
@@ -107,12 +107,15 @@ vm2                        : ok=7    changed=5    unreachable=0    failed=0    s
 buravtsovps@otus:~/work-dir/Ansible$ 
 ```
 
-Вставить оба сайта
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/11-Ansible/screenshots/1.png)
+
+
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/11-Ansible/screenshots/2.png)
 
 
 
 Примечание
-При запуске vagrant up сценарий наполнения будет запущен только после запуска всех виртуальных машин. Vagrant по умолчанию использует разные ключи SSH для разных хостов, поэтому если требуется организовать параллельное выпонение сценария наполнения, необходимо настроить виртуальные машины так, что бы все они использовали один и тот же ключ ssh. Поэтому в для Vagrantfile дописываем строку config.ssh.insert_key = false. (и потом путь до этого приватного ключа нужно указать в inventory.ini)
+При запуске vagrant up сценарий наполнения будет запущен только после запуска всех виртуальных машин. Vagrant по умолчанию использует разные ключи SSH для разных хостов, поэтому если требуется организовать параллельное выпонение сценария наполнения, необходимо настроить виртуальные машины так, что бы все они использовали один и тот же ключ ssh. Поэтому в для Vagrantfile дописываем строку config.ssh.insert_key = false. (и потом путь до этого приватного ключа нужно указать в [inventory.ini](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/11-Ansible/inventory.ini))
 ```
 buravtsovps@otus:~/work-dir/Ansible$ vagrant ssh-config
 Host vm1
