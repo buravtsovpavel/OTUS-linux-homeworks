@@ -87,7 +87,7 @@ CONTAINER ID   IMAGE        COMMAND                  CREATED          STATUS    
 
 
 
-###Доп.*
+## Доп.*
 
 Ставим docker-compose
 
