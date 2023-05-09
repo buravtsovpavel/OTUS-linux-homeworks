@@ -14,14 +14,14 @@ localhost:80 и localhost:3000
 
 ---
 
-С помощью vagrant поднимаем виртуальную машину и ствим на ней docker
+С помощью [vagrant](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/12-Docker/Vagrantfile) поднимаем виртуальную машину и ствим на ней docker
 ```
 [vagrant@docker ~]$ docker --version
 Docker version 23.0.5, build bc4487a
 [vagrant@docker ~]$ 
 ```
 
-В директории проекта создаём Dockerfile , статические страницы index80.html index3000.html и откорректированный файл конфига nginx default.conf
+В директории проекта создаём [Dockerfile](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/12-Docker/Dockerfile) , статические страницы [index80.html](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/12-Docker/index80.html) [index3000.html](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/12-Docker/index3000.html) и откорректированный файл конфига nginx [default.conf](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/12-Docker/default.conf)
 ```
 [vagrant@docker docker_ver2]$ tree
 .
@@ -112,7 +112,7 @@ Docker Compose version v2.17.3
 
 ```
 
-docker-compose.yml (опция build — указание на необходимость сборки из Dockerfile) для приложения Redmine, который добавляет в базовый образ redmine RTMaterial тему оформления.
+[docker-compose.yml](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/12-Docker/Redmine/docker-compose.yml) (опция build — указание на необходимость сборки из [Dockerfile](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/12-Docker/Redmine/Dockerfile)) для приложения Redmine, который добавляет в базовый образ redmine RTMaterial тему оформления.
 
 Запускаем сборку docker-compose.yml 
 ```
