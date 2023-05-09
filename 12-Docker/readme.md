@@ -81,12 +81,13 @@ CONTAINER ID   IMAGE        COMMAND                  CREATED          STATUS    
 После старта контейнера страницы доступны на разных портах в браузере на хостовой машине 192.168.11.155:80 192.168.11.155:3000(или можно курлануть на виртуалке loclhost:80 и localhost:3000)
 
 
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/12-Docker/screenshots/1.png)
 
-Вставить скрины браузера 
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/12-Docker/screenshots/2.png)
 
 
 
-Доп.*
+###Доп.*
 
 Ставим docker-compose
 
@@ -132,3 +133,5 @@ e1c4a13fc6de   redmine-redmine   "/docker-entrypoint.…"   49 minutes ago   Up 
 960d8f5cd23d   mysql:5.7         "docker-entrypoint.s…"   49 minutes ago   Up 49 minutes   3306/tcp, 33060/tcp                         redmine-db-1
 ```
 Новая тема доступна в настройках для применения и применяется:
+
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/12-Docker/screenshots/3.png)
