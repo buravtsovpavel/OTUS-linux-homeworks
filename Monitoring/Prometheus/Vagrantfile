@@ -1,0 +1,36 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+    config.vm.box = "centos/7"
+    config.vm.box_check_update = false
+  
+  
+    config.vm.define "prometheus" do |prometheus|
+        prometheus.vm.network  "private_network", ip: "192.168.11.163"
+        prometheus.vm.hostname = "prometheus"  
+        prometheus.vm.provider "virtualbox" do |vb|
+           vb.memory = "2096"
+        end
+    end
+  
+    
+   config.vm.define "node1" do |node1|
+       node1.vm.network "private_network", ip: "192.168.11.164"
+       node1.vm.hostname = "node1"  
+       node1.vm.provider "virtualbox" do |vb|
+           vb.memory = "2096"
+       end
+   end
+  
+  
+  # config.vm.define "zabbix_agent_2" do |zabbix_agent_2|
+  #     zabbix_agent_2.vm.network "private_network", ip: "192.168.11.162"
+  #     zabbix_agent_2.vm.hostname = "zabbix-agent-2"  
+  #     zabbix_agent_2.vm.provider "virtualbox" do |vb|
+  #         vb.memory = "2096"
+  #     end
+  # end
+  
+ 
+  end
