@@ -15,14 +15,14 @@
 Настроить на одной из систем:
 zabbix (использовать screen (комплексный экран);
 prometheus - grafana.
-Использование систем, примеры которых не рассматривались на занятии*
+
 
 **1. Настройка на Zabbix (Ubuntu 20.04)**
 
 Ставим Zabbix-server
 
-Для установки выбрана следующая конфигурация:
-(картинка)
+Для установки выбрана следующая конфигурация: Zabbix 6.0 LTS, Ubuntu 20.04, PostgreSQL, nginx
+
 
 Устанавливаем PostgreSQL:
 ```
@@ -89,12 +89,15 @@ Hostname=agent1
 
 и добавляем агента в web-интерфейсе на сервере:
 
-(картинка)
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/Monitoring/screenshots/27.jpg)
 
 теперь он добавился в hosts, сбор метрик пошёл.
 
-и можно настроить свой дашборд, как вариант так:
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/Monitoring/screenshots/29.jpg)
 
+и можно настроить свой дашборд:
+
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/Monitoring/screenshots/28.jpg)
 
 **2.Настройка на prometheus - grafana. CentOS 7**  
 
@@ -133,11 +136,11 @@ $ cp -r prometheuspackage/console_libraries /etc/prometheus
 $ chown -R prometheus:prometheus /etc/prometheus/consoles
 $ chown -R prometheus:prometheus /etc/prometheus/console_libraries
 ```
-* Создаем файл конфигурации(ссылка) и меняем владельца
+* Создаем файл [конфигурации](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/Monitoring/Prometheus/prometheus.yml) и меняем владельца
 ```
 chown prometheus:prometheus /etc/prometheus/prometheus.yml
 ```
-* Настраиваем сервис(ссылка) и запускаем
+* Настраиваем [сервис](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/Monitoring/Prometheus/prometheus.service) и запускаем
 ```
 systemctl daemon-reload
 $ systemctl start prometheus
@@ -155,7 +158,7 @@ tar xzfv node_exporter-1.5.0.linux-amd64.tar.gz
 useradd -rs /bin/false nodeusr
 mv node_exporter-1.5.0.linux-amd64/node_exporter /usr/local/bin/
 ```
-* Создаем сервис(ссылка) и запускаем
+* Создаем [сервис](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/Monitoring/Prometheus/node_exporter.service) и запускаем
 
 ```
 $ systemctl daemon-reload
@@ -174,3 +177,8 @@ $ systemctl daemon-reload
 $ systemctl start grafana-server
 ```
 * Далее интегрируем с Prometheus, импортируем готовый Dashboard или делаем свой
+
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/Monitoring/screenshots/32.jpg)
+
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/Monitoring/screenshots/18.jpg)
+
