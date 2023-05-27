@@ -23,3 +23,5 @@
 [12. Docker](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/12-Docker)
 
 [13. Мониторинг](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/Monitoring)
+
+[14. PAM](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/13-PAM)
