@@ -25,3 +25,5 @@
 [13. Мониторинг](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/Monitoring)
 
 [14. PAM](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/13-PAM)
+
+[15. Rsyslog сервер для сбора логов](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/14-logs)
