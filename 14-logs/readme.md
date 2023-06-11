@@ -28,7 +28,9 @@ elk.
 
 
 Задание выпонено по Методическому пособию по выполнению домашнего задания. 
-Центральный лог сервер настроен на rsyslog
+
+Центральный лог сервер настроен на rsyslog.
+
 Для сдачи Valgartfile и ansible.
 
 * set-localtime роль настройки времени на серверах
@@ -41,9 +43,10 @@ elk.
 Для проверки отправки логов на удалённый сервер можно удалить картинку, к которой будет обращаться nginx во время открытия веб-сраницы: rm /usr/share/nginx/html/img/header-background.png.  Попробуем несколько раз зайти по адресу http://192.168.50.10. Далее заходим на log-сервер и смотрим информацию об nginx:
 
 ●	cat /var/log/rsyslog/web/nginx_access.log 
+
 ●	cat /var/log/rsyslog/web/nginx_error.log 
 
-(вставить скриншот)
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/14-logs/png/nginx_access_error.png)
 
 Чтобы проверить, что логи аудита начали записываться на log-сервере,нужно внести изменения в файл /etc/nginx/nginx.conf или поменять его атрибут, потом посмотреть информацию об изменениях: 
 
@@ -53,4 +56,6 @@ elk.
 
 `grep nginx_conf /var/log/audit/audit.log`
 
-(вставить скриншот)
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/14-logs/png/ausearch.png)
+
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/14-logs/png/grep%20audit.png)
