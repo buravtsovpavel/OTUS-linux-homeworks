@@ -1,0 +1,32 @@
+---
+# tasks file for set-localtime
+    - name: set localtime   (указываем часовой пояс)
+      ansible.builtin.copy:
+        src: /usr/share/zoneinfo/Asia/Yekaterinburg
+        dest: /etc/localtime
+        remote_src: yes
+        mode: 0644
+        owner: root
+        group: root
+
+    - name: Restart service cron and daemon-reload  (перезупускаем службу NTP Chrony)
+      ansible.builtin.systemd:
+        name: crond
+        state: restarted
+        daemon_reload: yes
+
+    - name: Check crond status  (проверяем статус службы)
+      ansible.builtin.shell: "systemctl status chronyd | head -3 | tail -1"
+      register: chronyd_status
+     
+    - name: Check date  (проверяем что время и дата указаны верно)
+      ansible.builtin.shell: "date"
+      register: date_current
+    
+    - name: Print current date (выводим дату)
+      ansible.builtin.debug:
+        var: date_current
+
+    - name: Print crond status (выводим статус службы NTP Chrony)
+      ansible.builtin.debug:
+        var: chronyd_status

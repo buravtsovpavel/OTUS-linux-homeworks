@@ -1,0 +1,4 @@
+Role Name
+=========
+
+rsyslog-server

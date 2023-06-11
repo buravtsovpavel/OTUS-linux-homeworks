@@ -1,0 +1,41 @@
+---
+# tasks file for rsyslog-server
+    - name: uncomment line in config rsyslog (разрешаем запуск сервера для соединений TCP на порту 514 в конфиге /etc/rsyslog.conf)
+      ansible.builtin.replace:
+        path: "/etc/rsyslog.conf"
+        regexp: '\#\$ModLoad imudp'
+        replace: '$ModLoad imudp'
+
+    - name: разрешаем запуск сервера для соединений TCP на порту 514 в конфиге /etc/rsyslog.conf
+      ansible.builtin.replace:
+        path: "/etc/rsyslog.conf"
+        regexp: '\#\$UDPServerRun 514'
+        replace: '$UDPServerRun 514'
+
+    - name: разрешаем запуск сервера для соединений UDP на порту 514 в конфиге /etc/rsyslog.conf
+      ansible.builtin.replace:
+        path: "/etc/rsyslog.conf"
+        regexp: '\#\$ModLoad imtcp'
+        replace: '$ModLoad imtcp'
+
+    - name: разрешаем запуск сервера для соединений UDP на порту 514 в конфиге /etc/rsyslog.conf
+      ansible.builtin.replace:
+        path: "/etc/rsyslog.conf"
+        regexp: '\#\$InputTCPServerRun 514'
+        replace: '$InputTCPServerRun 514'
+
+
+    - name: добавляем правила приёма сообщений от хостов в конфиге /etc/rsyslog.conf
+      ansible.builtin.blockinfile:
+        path: /etc/rsyslog.conf
+        block: |
+      
+           $template RemoteLogs,"/var/log/rsyslog/%HOSTNAME%/%PROGRAMNAME%.log"
+           *.* ?RemoteLogs
+           & ~
+
+    - name: restart rsyslog (перезапускаем службу rsyslog)
+      ansible.builtin.systemd:
+        name: rsyslog
+        state: restarted
+        enabled: yes

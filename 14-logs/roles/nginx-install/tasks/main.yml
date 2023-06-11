@@ -1,0 +1,27 @@
+---
+# tasks file for nginx-install
+    - name: NGINX | Install EPEL Repo package from standart repo (установкa пакета epel-release)
+      ansible.builtin.yum:
+        name: epel-release
+        state: present
+      tags:
+        - epel-package
+        - packages
+
+    - name: NGINX | Install NGINX package from EPEL Repo (устанавливаем пакет nginx)
+      ansible.builtin.yum:
+        name: nginx
+        state: latest
+      tags:
+        - nginx-package
+        - packages
+
+    - name: cp nginx.conf (копируем заранее подготовленный конфиг nginx и перезагружаем сервис)
+      ansible.builtin.copy:
+        src: nginx.conf
+        dest: /etc/nginx/nginx.conf
+        mode: 0644
+        owner: root
+        group: root
+      notify:
+        - restart nginx

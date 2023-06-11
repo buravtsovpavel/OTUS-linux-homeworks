@@ -1,0 +1,10 @@
+---
+# tasks file for auditd-log
+  - name: открываем порт TCP 60
+    ansible.builtin.replace:
+        path: "/etc/audit/auditd.conf"
+        regexp: '\#\#tcp_listen_port = 60'
+        replace: 'tcp_listen_port = 60'
+
+  - name: restart auditd (перезапускаем службу auditd)
+    ansible.builtin.shell: service auditd restart

@@ -1,0 +1,17 @@
+---
+- hosts: web
+  become: true
+
+  roles:
+    - set-localtime
+    - nginx-install
+    - auditd-web
+    
+- hosts: log
+  become: true
+
+  roles:
+    - set-localtime
+    - rsyslog-server
+    - auditd-log
+    
