@@ -27,3 +27,5 @@
 [14. PAM](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/13-PAM)
 
 [15. Rsyslog сервер для сбора логов](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/14-logs)
+
+[OSPF](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/OSPF)
