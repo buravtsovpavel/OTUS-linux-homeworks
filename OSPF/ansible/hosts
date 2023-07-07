@@ -1,0 +1,4 @@
+[routers]
+router1 ansible_host=192.168.50.10 ansible_user=vagrant ansible_ssh_private_key_file=/home/buravtsovps/OTUS/module3/OSPF/.vagrant/machines/router1/virtualbox/private_key description_enp0s8=r1-r2 description_enp0s9=r1-r3 description_enp0s10=net_router1 router_id=1.1.1.1
+router2 ansible_host=192.168.50.11 ansible_user=vagrant ansible_ssh_private_key_file=/home/buravtsovps/OTUS/module3/OSPF/.vagrant/machines/router2/virtualbox/private_key description_enp0s8=r2-r1 description_enp0s9=r2-r3 description_enp0s10=net_router2 router_id=2.2.2.2
+router3 ansible_host=192.168.50.12 ansible_user=vagrant ansible_ssh_private_key_file=/home/buravtsovps/OTUS/module3/OSPF/.vagrant/machines/router3/virtualbox/private_key description_enp0s8=r3-r2 description_enp0s9=r3-r1 description_enp0s10=net_router3 router_id=3.3.3.3

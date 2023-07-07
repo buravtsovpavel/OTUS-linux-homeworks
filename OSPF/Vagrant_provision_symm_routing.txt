@@ -1,0 +1,102 @@
+buravtsovps@otus:~/OTUS/module3/OSPF$ vagrant provision
+==> router1: You assigned a static IP ending in ".1" to this machine.
+==> router1: This is very often used by the router and can cause the
+==> router1: network to not work properly. If the network doesn't work
+==> router1: properly, try changing this IP.
+==> router1: You assigned a static IP ending in ".1" to this machine.
+==> router1: This is very often used by the router and can cause the
+==> router1: network to not work properly. If the network doesn't work
+==> router1: properly, try changing this IP.
+==> router1: You assigned a static IP ending in ".1" to this machine.
+==> router1: This is very often used by the router and can cause the
+==> router1: network to not work properly. If the network doesn't work
+==> router1: properly, try changing this IP.
+==> router2: You assigned a static IP ending in ".1" to this machine.
+==> router2: This is very often used by the router and can cause the
+==> router2: network to not work properly. If the network doesn't work
+==> router2: properly, try changing this IP.
+==> router3: You assigned a static IP ending in ".1" to this machine.
+==> router3: This is very often used by the router and can cause the
+==> router3: network to not work properly. If the network doesn't work
+==> router3: properly, try changing this IP.
+==> router3: You assigned a static IP ending in ".1" to this machine.
+==> router3: This is very often used by the router and can cause the
+==> router3: network to not work properly. If the network doesn't work
+==> router3: properly, try changing this IP.
+==> router3: Running provisioner: ansible...
+    router3: Running ansible-playbook...
+
+PLAY [OSPF] ********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [router2]
+ok: [router1]
+ok: [router3]
+
+TASK [install base tools] ******************************************************
+ok: [router1]
+ok: [router2]
+ok: [router3]
+
+TASK [disable ufw service] *****************************************************
+ok: [router2]
+ok: [router1]
+ok: [router3]
+
+TASK [add gpg frrouting.org] ***************************************************
+ok: [router1]
+ok: [router3]
+ok: [router2]
+
+TASK [add frr repo] ************************************************************
+ok: [router1]
+ok: [router3]
+ok: [router2]
+
+TASK [install FRR packages] ****************************************************
+ok: [router1]
+ok: [router3]
+ok: [router2]
+
+TASK [set up forward packages across routers] **********************************
+ok: [router2]
+ok: [router1]
+ok: [router3]
+
+TASK [base set up OSPF] ********************************************************
+ok: [router2]
+ok: [router1]
+ok: [router3]
+
+TASK [set up OSPF] *************************************************************
+ok: [router3]
+ok: [router1]
+changed: [router2]
+
+TASK [restart FRR] *************************************************************
+changed: [router3]
+changed: [router2]
+changed: [router1]
+
+TASK [set up asynchronous routing] *********************************************
+ok: [router2]
+ok: [router3]
+ok: [router1]
+
+TASK [set up OSPF] *************************************************************
+ok: [router1]
+ok: [router2]
+ok: [router3]
+
+TASK [restart FRR] *************************************************************
+changed: [router3]
+changed: [router1]
+changed: [router2]
+
+PLAY RECAP *********************************************************************
+router1                    : ok=13   changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+router2                    : ok=13   changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+router3                    : ok=13   changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+buravtsovps@otus:~/OTUS/module3/OSPF$ 
+
