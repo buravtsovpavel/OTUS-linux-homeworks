@@ -3,7 +3,7 @@
 **Vagrant-стенд c OSPF**
 
 ---
-###Цель домашнего задания
+### Цель домашнего задания
 Создать домашнюю сетевую лабораторию. Научится настраивать протокол OSPF в Linux-based системах.
 
 
@@ -21,20 +21,20 @@
 
 ---
 
-**1. Разворачиваем 3 виртуальные машины используя Vagrantfile.(ссылку вставить)** 
+**1. Разворачиваем 3 виртуальные машины используя ![Vagrantfile](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/OSPF/Vagrantfile).** 
 
 Результатом развёртывания будут 3 созданные виртуальные машины, которые соединены между собой сетями (10.0.10.0/30, 10.0.11.0/30 и 10.0.12.0/30). У каждого роутера есть дополнительная сеть:
 на router1 — 192.168.10.0/24
 на router2 — 192.168.20.0/24
 на router3 — 192.168.30.0/24
 
-(вставить картинку)
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/OSPF/png/%D1%81%D1%85%D0%B5%D0%BC%D0%B0.png)
 
 На данном этапе ping до дополнительных сетей (192.168.10-30.0/24) с соседних роутеров недоступен.
 
 **2. Настраиваем OSPF между машинами на базе Quagga**
 
-* В результате действий сделанных согласно методическому пособию получаем отредактированный файл файл /etc/frr/daemons (ссылку вставить), а также на каждом маршрутизаторе сконфигурированный файл файл /etc/frr/frr.conf (ссылку вставить) который будет содержать в себе информацию о требуемых интерфейсах и OSPF.
+* В результате действий сделанных согласно методическому пособию получаем отредактированный файл файл ![/etc/frr/daemons](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/OSPF/ansible/templates/daemons), а также на каждом маршрутизаторе сконфигурированный файл файл ![/etc/frr/frr.conf](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/OSPF/router_config) который будет содержать в себе информацию о требуемых интерфейсах и OSPF.
 * проверяем, что владельцем файла является пользователь frr и при необходимости назначаем правильные права 
 ```
 chown frr:frr /etc/frr/frr.conf 
@@ -50,11 +50,14 @@ chmod 640 /etc/frr/frr.conf
 10.0.12.0/30
 
 Например с router1:
-(вставляем пинги для примера)
+
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/OSPF/png/router1_ping_1.png)
+
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/OSPF/png/router1_ping_2.png)
 
 Так же при отключении интерфейса enp0s9 сеть 192.168.30.0/24 нам остаётся доступна по другому маршруту:
 
-(вставить скриншот tracer и vtsh)
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/OSPF/png/traceroute.png)
 
 **3. Настройка ассиметричного роутинга**
 
@@ -125,6 +128,6 @@ listening on enp0s9, link-type EN10MB (Ethernet), capture size 262144 bytes
 ```
 
 
-Для развёртвания стенда подготовлен ansible playbook. 
+Для развёртвания стенда подготовлен ![ansible playbook](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/OSPF/ansible). 
 
-Для переключения между ассиметричным и симметричным роутингом добавлена переменная symmetric_routing. С выставленным значением false в файле defaults/main.yml в шаблоне jinja2(ссылка) будут применены настройки для ассиметричного роутинга, с высталенныи заначением true - для симметричного.
+Для переключения между ассиметричным и симметричным роутингом добавлена переменная ![symmetric_routing](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/OSPF/ansible/defaults/main.yml). С выставленным значением false в файле defaults/main.yml в ![шаблоне jinja2](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/OSPF/ansible/templates/frr.conf.j2) будут применены настройки для ассиметричного роутинга, с высталенныи заначением true - для симметричного.
