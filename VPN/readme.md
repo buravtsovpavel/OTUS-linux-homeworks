@@ -1,4 +1,4 @@
-##Домашнее задание
+## Домашнее задание
 
 **VPN**
 
@@ -22,28 +22,28 @@
 
 ---
 
-###1. Между двумя виртуалками поднять vpn в режимах:
+### 1. Между двумя виртуалками поднять vpn в режимах:
 
 - tun
 
 - tap
 
-В результате запуска предподготовленного Vagrantfile(ссылка) поднимаются две виртуальные машины server и client. Для преднастройки написан ansible-playbook. 
+В результате запуска предподготовленного [Vagrantfile](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/VPN/task1/Vagrantfile) поднимаются две виртуальные машины server и client. Для преднастройки написан [ansible-playbook](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/VPN/task1/tun_tap_server.yml). 
 Для изменения режима работы (tun или tap) необходимо в конфигарационном файле
-сервера(ссылка) и клиента(ссылка) изменять значение директивы dev и заново запустить провижинг:
+[сервера](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/VPN/task1/files/server.conf) и [клиента](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/VPN/task1/files/client.conf) изменять значение директивы dev и заново запустить провижинг:
 
 ```
 vagrant provision
 ```
 **Замеры скорости в туннеле для режима tap:**
 
-картинка1
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/VPN/png/tap_iperf.png)
 
 **Замеры скорости в туннеле для режима tun:**
 
-картинка2
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/VPN/png/tun_iperf.png)
 
-Видно незначительное увеличение объёма переданных данных.
+Видно незначительное увеличение объёма переданных данных в режиме tun.
 
 
 В терминологии компьютерных сетей, TUN и TAP — виртуальные сетевые драйверы ядра системы. Они представляют собой программные сетевые устройства, которые отличаются от обычных аппаратных сетевых карт.
@@ -74,41 +74,14 @@ TUN:
 - broadcast-трафик обычно не передаётся;
 - нельзя использовать мосты.
 
-###2. Поднять RAS на базе OpenVPN с клиентскими сертификатами,
+### 2. Поднять RAS на базе OpenVPN с клиентскими сертификатами,
 
-В результате запуска предподготовленного Vagrantfile(ссылка) поднимаются две виртуальные машины server и client. Для преднастройки написан ansible-playbook. 
+В результате запуска предподготовленного [Vagrantfile](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/VPN/task2/Vagrantfile) поднимаются две виртуальные машины server и client. Для преднастройки написан [ansible-playbook](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/VPN/task2/ras.yml). 
 
 Проверяем пинг по внутреннему IP адресу сервера в туннеле.
 
-```
-[root@client ~]# ping -c 4 10.10.10.1
-PING 10.10.10.1 (10.10.10.1) 56(84) bytes of data.
-64 bytes from 10.10.10.1: icmp_seq=1 ttl=64 time=1.13 ms
-64 bytes from 10.10.10.1: icmp_seq=2 ttl=64 time=0.784 ms
-64 bytes from 10.10.10.1: icmp_seq=3 ttl=64 time=0.766 ms
-64 bytes from 10.10.10.1: icmp_seq=4 ttl=64 time=1.40 ms
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/VPN/png/ping.png)
 
---- 10.10.10.1 ping statistics ---
-4 packets transmitted, 4 received, 0% packet loss, time 3089ms
-rtt min/avg/max/mdev = 0.766/1.019/1.398/0.263 ms
 
-```
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/VPN/png/netstat_ip_r.png)
 
-```
-[root@client ~]# netstat -rn
-Kernel IP routing table
-Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
-0.0.0.0         10.0.2.2        0.0.0.0         UG        0 0          0 eth0
-10.0.2.0        0.0.0.0         255.255.255.0   U         0 0          0 eth0
-10.10.10.0      10.10.10.5      255.255.255.0   UG        0 0          0 tun0
-10.10.10.5      0.0.0.0         255.255.255.255 UH        0 0          0 tun0
-192.168.56.0    0.0.0.0         255.255.255.0   U         0 0          0 eth1
-[root@client ~]# ip r
-default via 10.0.2.2 dev eth0 proto dhcp metric 100 
-10.0.2.0/24 dev eth0 proto kernel scope link src 10.0.2.15 metric 100 
-10.10.10.0/24 via 10.10.10.5 dev tun0 
-10.10.10.5 dev tun0 proto kernel scope link src 10.10.10.6 
-192.168.56.0/24 dev eth1 proto kernel scope link src 192.168.56.20 metric 101 
-[root@client ~]# 
-
-```
