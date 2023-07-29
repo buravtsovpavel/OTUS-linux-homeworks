@@ -1,0 +1,172 @@
+---
+- name: Task1_tun_tpa_vpn
+  hosts: all
+  become: true
+
+  vars:
+    
+      source_folder : ./files
+
+  tasks:
+
+    - name: отключаем SELinux
+      selinux:
+        policy: targeted
+        state: disabled
+
+
+    - name: устанавливаем epel репозиторий
+      yum:
+        name: epel-release
+        state: present
+
+    - name: устанавливаем пакет openvpn и iperf3
+      yum:
+        name:
+          - openvpn
+          - easy-rsa
+          - expect
+          - nano
+        state: present
+
+
+    - name: включаем маршрутизацию транзитных пакетов
+      sysctl:
+        name: net.ipv4.conf.all.forwarding
+        value: '1'
+        state: present
+
+
+    - name: создадим service unit для запуска openvpn
+      copy:
+        src: files/openvpn.service
+        dest: /etc/systemd/system/openvpn@.service
+        owner: root
+        group: root
+        mode: 0640
+
+    - name: ## БЛОК для server ##
+      block:  
+
+        - name: инициализируем pki
+          shell: echo 'yes' | /usr/share/easy-rsa/3.0.8/easyrsa init-pki
+          args:
+            chdir: "/etc/openvpn/"
+            creates: "/etc/openvpn/pki"
+                
+      #Сгенерируем необходимые ключи и сертификаты для сервера
+
+        - name: Создаём ключ удостоверяющего центра CA
+          shell: echo 'rasvpn' | /usr/share/easy-rsa/3.0.8/easyrsa build-ca nopass
+          args:
+            chdir: "/etc/openvpn/"
+            creates: "/etc/openvpn/pki/ca.crt"
+
+        - name: Создаем сертификат для сервера без пароля
+          shell: echo 'rasvpn' | /usr/share/easy-rsa/3.0.8/easyrsa gen-req server nopass
+          args:
+            chdir: "/etc/openvpn/"
+            creates: "/etc/openvpn/pki/private/server.key"
+
+
+        - name: Подписываем запрос на получение сертификата у нашего CA
+          shell: echo 'yes' | /usr/share/easy-rsa/3.0.8/easyrsa sign-req server server
+          args:
+            chdir: "/etc/openvpn/"
+            creates: "/etc/openvpn/pki/issued/server.crt"
+      
+        - name: Генерируем ключ Диффи-Хелмана
+          shell: /usr/share/easy-rsa/3.0.8/easyrsa gen-dh
+          args:
+            chdir: "/etc/openvpn/"
+            creates: "/etc/openvpn/pki/dh.pem"
+
+        - name: Генерируем TA ключ
+          shell: openvpn --genkey --secret ca.key
+          args:
+            chdir: "/etc/openvpn/"
+            creates: "/etc/openvpn/ca.key"
+      
+
+        #Сгенерируем сертификаты для клиента
+        
+        - name: Создадим ключ для клиента
+          shell: echo 'client' | /usr/share/easy-rsa/3/easyrsa gen-req client nopass
+          args:
+            chdir: "/etc/openvpn"
+            creates: "/etc/openvpn/pki/private/client.key"
+
+        - name: Создаём запрос на подписание
+          shell: echo 'yes' | /usr/share/easy-rsa/3/easyrsa sign-req client client
+          args:
+            chdir: "/etc/openvpn"
+            creates: "/etc/openvpn/pki/issued/client.crt"
+      
+      
+        - name: Зададим параметр iroute для клиента
+          shell: echo 'iroute 10.10.10.0 255.255.255.0' > /etc/openvpn/client/client
+          args:
+            chdir: "/etc/openvpn"
+            creates: "/etc/openvpn/client/client"
+      
+        - name: создаём конфигурационный файл server.conf
+          copy:
+            src: files/server.conf
+            dest: /etc/openvpn/server.conf
+            owner: root
+            group: root
+            mode: 0640
+
+        - name: запускаем openvpn сервер и добавляем в автозагрузку.
+          service:
+            name: openvpn@server
+            state: restarted
+            enabled: true
+            daemon_reload: yes
+
+        - name: копируем файлы на управляющую машину, что бы потом скопировать его на клиента
+          fetch: 
+            src: '{{ item }}'
+            dest: files/ 
+            flat: yes
+          loop: 
+          - /etc/openvpn/pki/ca.crt
+          - /etc/openvpn/pki/issued/client.crt
+          - /etc/openvpn/pki/private/client.key
+          
+
+      when: inventory_hostname == "server"
+   
+        
+       
+    - name: ## БЛОК для сlient ##
+      block:  
+
+        - name: создаём конфигурационный файл vpn-клиента
+          copy:
+            src: files/client.conf
+            dest: /etc/openvpn/client.conf
+            mode: 0644
+            owner: root
+            group: root
+  
+        - name: копируем файлы, которые были созданы на сервере и перемещёны в files на управляющий хост
+          copy:
+            src: "{{ source_folder }}/{{ item }}"
+            dest: /etc/openvpn/
+            mode: 0644
+            owner: root
+            group: root
+          loop:
+          - ca.crt
+          - client.crt
+          - client.key
+
+        - name: запускаем openvpn сервер и добавляем в автозагрузку.
+          service:
+            name: openvpn@client
+            state: restarted
+            enabled: true
+            daemon_reload: yes
+
+      when: inventory_hostname == "client"

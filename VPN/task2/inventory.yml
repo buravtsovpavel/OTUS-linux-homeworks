@@ -1,0 +1,14 @@
+all:
+    hosts:
+        server:
+            ansible_host: 192.168.56.10
+            #ansible_private_key_file: /home/buravtsovps/OTUS/module3/VPN/.vagrant/machines/server/virtualbox/private_key
+            ansible_private_key_file: /home/buravtsovps/.vagrant.d/insecure_private_key
+            ansible_port: 22
+
+        client:
+            ansible_host: 192.168.56.20
+            #ansible_private_key_file: /home/buravtsovps/OTUS/module3/VPN/.vagrant/machines/client/virtualbox/private_key
+            ansible_private_key_file: /home/buravtsovps/.vagrant.d/insecure_private_key
+            ansible_port: 22
+

@@ -1,0 +1,106 @@
+---
+- name: Task1_tun_tpa_vpn
+  hosts: all
+  become: true
+
+  tasks:
+
+    - name: устанавливаем epel репозиторий
+      yum:
+        name: epel-release
+        state: present
+
+    - name: устанавливаем пакет openvpn и iperf3
+      yum:
+        name:
+          - openvpn
+          - iperf3
+        state: present
+
+    - name: отключаем SELinux
+      selinux:
+        policy: targeted
+        state: disabled
+
+    - name: включаем маршрутизацию транзитных пакетов
+      sysctl:
+        name: net.ipv4.conf.all.forwarding
+        value: '1'
+        state: present
+
+    - name: создадим service unit для запуска openvpn
+      copy:
+        src: files/openvpn.service
+        dest: /etc/systemd/system/openvpn@.service
+        owner: root
+        group: root
+        mode: 0640
+
+    #- name: запускаем openvpn сервер и добавляем в автозагрузку.
+    #  service:
+    #    name: openvpn@server
+    #    state: restarted
+    #    enabled: true
+    #   daemon_reload: yes
+    
+    
+    - name: ## БЛОК для server ##
+      block:  
+
+        - name: создаём файл-ключ
+          shell: openvpn --genkey --secret /etc/openvpn/static.key
+    
+        - name: копируем static.key на управляющую машину, что бы потом скопировать его на клиента
+          fetch: 
+            src: /etc/openvpn/static.key
+            dest: files/ 
+            flat: yes
+                
+        - name: создаём конфигурационный файл vpn-сервера
+          copy:
+            src: files/server.conf
+            dest: /etc/openvpn/server.conf
+            owner: root
+            group: root
+            mode: 0640
+
+        - name: запускаем openvpn сервер и добавляем в автозагрузку.
+          service:
+            name: openvpn@server
+            state: restarted
+            enabled: true
+            daemon_reload: yes
+
+      when: inventory_hostname == "server"
+      
+    - name: ## БЛОК для сlient ##
+      block:  
+
+        - name: создаём конфигурационный файл vpn-клиента
+          copy:
+            src: files/client.conf
+            dest: /etc/openvpn/server.conf
+            mode: 0644
+            owner: root
+            group: root
+  
+        - name: копируем файл-ключ static.key, который был создан на сервере и перемещён в files на управляющий хост
+          copy:
+            src: files/static.key
+            dest: /etc/openvpn/
+            mode: 0644
+            owner: root
+            group: root
+
+        - name: запускаем openvpn сервер и добавляем в автозагрузку.
+          service:
+            name: openvpn@server
+            state: restarted
+            enabled: true
+            daemon_reload: yes
+
+      when: inventory_hostname == "client"
+
+        
+       
+

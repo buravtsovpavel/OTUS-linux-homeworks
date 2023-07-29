@@ -1,0 +1,163 @@
+buravtsovps@otus:~/OTUS/module3/VPN/task2$ vagrant up
+Bringing machine 'server' up with 'virtualbox' provider...
+Bringing machine 'client' up with 'virtualbox' provider...
+==> server: Importing base box 'centos/stream8'...
+==> server: Matching MAC address for NAT networking...
+==> server: Checking if box 'centos/stream8' version '20210210.0' is up to date...
+==> server: Setting the name of the VM: server_loc_vpn
+==> server: Clearing any previously set network interfaces...
+==> server: Preparing network interfaces based on configuration...
+    server: Adapter 1: nat
+    server: Adapter 2: hostonly
+==> server: Forwarding ports...
+    server: 22 (guest) => 2222 (host) (adapter 1)
+==> server: Running 'pre-boot' VM customizations...
+==> server: Booting VM...
+==> server: Waiting for machine to boot. This may take a few minutes...
+    server: SSH address: 127.0.0.1:2222
+    server: SSH username: vagrant
+    server: SSH auth method: private key
+==> server: Machine booted and ready!
+==> server: Checking for guest additions in VM...
+    server: No guest additions were detected on the base box for this VM! Guest
+    server: additions are required for forwarded ports, shared folders, host only
+    server: networking, and more. If SSH fails on this machine, please install
+    server: the guest additions and repackage the box to continue.
+    server: 
+    server: This is not an error message; everything may continue to work properly,
+    server: in which case you may ignore this message.
+==> server: Setting hostname...
+==> server: Configuring and enabling network interfaces...
+==> server: Rsyncing folder: /home/buravtsovps/OTUS/module3/VPN/task2/ => /vagrant
+==> client: Importing base box 'centos/stream8'...
+==> client: Matching MAC address for NAT networking...
+==> client: Checking if box 'centos/stream8' version '20210210.0' is up to date...
+==> client: Setting the name of the VM: client_loc_vpn
+==> client: Fixed port collision for 22 => 2222. Now on port 2200.
+==> client: Clearing any previously set network interfaces...
+==> client: Preparing network interfaces based on configuration...
+    client: Adapter 1: nat
+    client: Adapter 2: hostonly
+==> client: Forwarding ports...
+    client: 22 (guest) => 2200 (host) (adapter 1)
+==> client: Running 'pre-boot' VM customizations...
+==> client: Booting VM...
+==> client: Waiting for machine to boot. This may take a few minutes...
+    client: SSH address: 127.0.0.1:2200
+    client: SSH username: vagrant
+    client: SSH auth method: private key
+==> client: Machine booted and ready!
+==> client: Checking for guest additions in VM...
+    client: No guest additions were detected on the base box for this VM! Guest
+    client: additions are required for forwarded ports, shared folders, host only
+    client: networking, and more. If SSH fails on this machine, please install
+    client: the guest additions and repackage the box to continue.
+    client: 
+    client: This is not an error message; everything may continue to work properly,
+    client: in which case you may ignore this message.
+==> client: Setting hostname...
+==> client: Configuring and enabling network interfaces...
+==> client: Rsyncing folder: /home/buravtsovps/OTUS/module3/VPN/task2/ => /vagrant
+==> client: Running provisioner: ansible...
+    client: Running ansible-playbook...
+
+PLAY [Task1_tun_tpa_vpn] *******************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [client]
+ok: [server]
+
+TASK [отключаем SELinux] *******************************************************
+[WARNING]: SELinux state temporarily changed from 'enforcing' to 'permissive'.
+State change will take effect next reboot.
+changed: [client]
+changed: [server]
+
+TASK [устанавливаем epel репозиторий] ******************************************
+changed: [client]
+changed: [server]
+
+TASK [устанавливаем пакет openvpn и iperf3] ************************************
+changed: [client]
+changed: [server]
+
+TASK [включаем маршрутизацию транзитных пакетов] *******************************
+changed: [client]
+changed: [server]
+
+TASK [создадим service unit для запуска openvpn] *******************************
+changed: [server]
+changed: [client]
+
+TASK [инициализируем pki] ******************************************************
+skipping: [client]
+changed: [server]
+
+TASK [Создаём ключ удостоверяющего центра CA] **********************************
+skipping: [client]
+changed: [server]
+
+TASK [Создаем сертификат для сервера без пароля] *******************************
+skipping: [client]
+changed: [server]
+
+TASK [Подписываем запрос на получение сертификата у нашего CA] *****************
+skipping: [client]
+changed: [server]
+
+TASK [Генерируем ключ Диффи-Хелмана] *******************************************
+skipping: [client]
+changed: [server]
+
+TASK [Генерируем TA ключ] ******************************************************
+skipping: [client]
+changed: [server]
+
+TASK [Создадим ключ для клиента] ***********************************************
+skipping: [client]
+changed: [server]
+
+TASK [Создаём запрос на подписание] ********************************************
+skipping: [client]
+changed: [server]
+
+TASK [Зададим параметр iroute для клиента] *************************************
+skipping: [client]
+changed: [server]
+
+TASK [создаём конфигурационный файл server.conf] *******************************
+skipping: [client]
+changed: [server]
+
+TASK [запускаем openvpn сервер и добавляем в автозагрузку.] ********************
+skipping: [client]
+changed: [server]
+
+TASK [копируем файлы на управляющую машину, что бы потом скопировать его на клиента] ***
+skipping: [client] => (item=/etc/openvpn/pki/ca.crt) 
+skipping: [client] => (item=/etc/openvpn/pki/issued/client.crt) 
+skipping: [client] => (item=/etc/openvpn/pki/private/client.key) 
+changed: [server] => (item=/etc/openvpn/pki/ca.crt)
+changed: [server] => (item=/etc/openvpn/pki/issued/client.crt)
+changed: [server] => (item=/etc/openvpn/pki/private/client.key)
+
+TASK [создаём конфигурационный файл vpn-клиента] *******************************
+skipping: [server]
+changed: [client]
+
+TASK [копируем файлы, которые были созданы на сервере и перемещёны в files на управляющий хост] ***
+skipping: [server] => (item=ca.crt) 
+skipping: [server] => (item=client.crt) 
+skipping: [server] => (item=client.key) 
+changed: [client] => (item=ca.crt)
+changed: [client] => (item=client.crt)
+changed: [client] => (item=client.key)
+
+TASK [запускаем openvpn сервер и добавляем в автозагрузку.] ********************
+skipping: [server]
+changed: [client]
+
+PLAY RECAP *********************************************************************
+client                     : ok=9    changed=8    unreachable=0    failed=0    skipped=12   rescued=0    ignored=0   
+server                     : ok=18   changed=17   unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
+
