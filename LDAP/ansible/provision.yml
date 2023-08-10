@@ -4,7 +4,7 @@
   become: yes
   tasks:
   #Установка текстового редактора nano и chrony
-  - name: install softs on CentOS
+  - name: install softs
     ansible.builtin.yum:
       name:
         - nano
