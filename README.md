@@ -31,3 +31,5 @@
 [OSPF](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/OSPF)
 
 [VPN](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/VPN)
+
+[LDAP](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/LDAP)
