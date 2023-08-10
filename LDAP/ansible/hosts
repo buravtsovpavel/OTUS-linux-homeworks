@@ -1,0 +1,19 @@
+all:
+    hosts:
+        ipa_server:
+            ansible_host: 192.168.57.10
+            #ansible_private_key_file: /home/buravtsovps/OTUS/module3/LDAP/.vagrant/machines/ipa_server/virtualbox/private_key
+            ansible_private_key_file: /home/buravtsovps/.vagrant.d/insecure_private_key
+            ansible_port: 22
+
+        ipa_client1:
+            ansible_host: 192.168.57.11
+            #ansible_private_key_file: /home/buravtsovps/OTUS/module3/LDAP/.vagrant/machines/ipa_client1/virtualbox/private_key
+            ansible_private_key_file: /home/buravtsovps/.vagrant.d/insecure_private_key
+            ansible_port: 22
+
+        ipa_client2:
+            ansible_host: 192.168.57.12
+            #ansible_private_key_file: /home/buravtsovps/OTUS/module3/LDAP/.vagrant/machines/ipa_client2/virtualbox/private_key
+            ansible_private_key_file: /home/buravtsovps/.vagrant.d/insecure_private_key
+            ansible_port: 22

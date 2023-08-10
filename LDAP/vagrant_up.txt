@@ -1,0 +1,201 @@
+buravtsovps@otus:~/OTUS/module3/LDAP/HWLDAP$ vagrant up
+Bringing machine 'ipa_server' up with 'virtualbox' provider...
+Bringing machine 'ipa_client1' up with 'virtualbox' provider...
+Bringing machine 'ipa_client2' up with 'virtualbox' provider...
+==> ipa_server: Importing base box 'almalinux/9'...
+==> ipa_server: Matching MAC address for NAT networking...
+==> ipa_server: Checking if box 'almalinux/9' version '9.2.20230513' is up to date...
+==> ipa_server: Setting the name of the VM: HWLDAP_ipa_server_1691674725439_59975
+==> ipa_server: Clearing any previously set network interfaces...
+==> ipa_server: Preparing network interfaces based on configuration...
+    ipa_server: Adapter 1: nat
+    ipa_server: Adapter 2: hostonly
+==> ipa_server: You are trying to forward to privileged ports (ports <= 1024). Most
+==> ipa_server: operating systems restrict this to only privileged process (typically
+==> ipa_server: processes running as an administrative user). This is a warning in case
+==> ipa_server: the port forwarding doesn't work. If any problems occur, please try a
+==> ipa_server: port higher than 1024.
+==> ipa_server: Forwarding ports...
+    ipa_server: 80 (guest) => 80 (host) (adapter 1)
+    ipa_server: 22 (guest) => 2222 (host) (adapter 1)
+==> ipa_server: Running 'pre-boot' VM customizations...
+==> ipa_server: Booting VM...
+==> ipa_server: Waiting for machine to boot. This may take a few minutes...
+    ipa_server: SSH address: 127.0.0.1:2222
+    ipa_server: SSH username: vagrant
+    ipa_server: SSH auth method: private key
+    ipa_server: 
+    ipa_server: Vagrant insecure key detected. Vagrant will automatically replace
+    ipa_server: this with a newly generated keypair for better security.
+    ipa_server: 
+    ipa_server: Inserting generated public key within guest...
+    ipa_server: Removing insecure key from the guest if it's present...
+    ipa_server: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> ipa_server: Machine booted and ready!
+==> ipa_server: Checking for guest additions in VM...
+==> ipa_server: Setting hostname...
+==> ipa_server: Configuring and enabling network interfaces...
+==> ipa_server: Installing rsync to the VM...
+==> ipa_server: Rsyncing folder: /home/buravtsovps/OTUS/module3/LDAP/HWLDAP/ => /vagrant
+==> ipa_client1: Importing base box 'almalinux/9'...
+==> ipa_client1: Matching MAC address for NAT networking...
+==> ipa_client1: Checking if box 'almalinux/9' version '9.2.20230513' is up to date...
+==> ipa_client1: Setting the name of the VM: HWLDAP_ipa_client1_1691674841330_96430
+==> ipa_client1: Fixed port collision for 22 => 2222. Now on port 2200.
+==> ipa_client1: Clearing any previously set network interfaces...
+==> ipa_client1: Preparing network interfaces based on configuration...
+    ipa_client1: Adapter 1: nat
+    ipa_client1: Adapter 2: hostonly
+==> ipa_client1: Forwarding ports...
+    ipa_client1: 22 (guest) => 2200 (host) (adapter 1)
+==> ipa_client1: Running 'pre-boot' VM customizations...
+==> ipa_client1: Booting VM...
+==> ipa_client1: Waiting for machine to boot. This may take a few minutes...
+    ipa_client1: SSH address: 127.0.0.1:2200
+    ipa_client1: SSH username: vagrant
+    ipa_client1: SSH auth method: private key
+    ipa_client1: Warning: Connection reset. Retrying...
+    ipa_client1: 
+    ipa_client1: Vagrant insecure key detected. Vagrant will automatically replace
+    ipa_client1: this with a newly generated keypair for better security.
+    ipa_client1: 
+    ipa_client1: Inserting generated public key within guest...
+    ipa_client1: Removing insecure key from the guest if it's present...
+    ipa_client1: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> ipa_client1: Machine booted and ready!
+==> ipa_client1: Checking for guest additions in VM...
+==> ipa_client1: Setting hostname...
+==> ipa_client1: Configuring and enabling network interfaces...
+==> ipa_client1: Installing rsync to the VM...
+==> ipa_client1: Rsyncing folder: /home/buravtsovps/OTUS/module3/LDAP/HWLDAP/ => /vagrant
+==> ipa_client2: Importing base box 'almalinux/9'...
+==> ipa_client2: Matching MAC address for NAT networking...
+==> ipa_client2: Checking if box 'almalinux/9' version '9.2.20230513' is up to date...
+==> ipa_client2: Setting the name of the VM: HWLDAP_ipa_client2_1691674978793_81435
+==> ipa_client2: Fixed port collision for 22 => 2222. Now on port 2201.
+==> ipa_client2: Clearing any previously set network interfaces...
+==> ipa_client2: Preparing network interfaces based on configuration...
+    ipa_client2: Adapter 1: nat
+    ipa_client2: Adapter 2: hostonly
+==> ipa_client2: Forwarding ports...
+    ipa_client2: 22 (guest) => 2201 (host) (adapter 1)
+==> ipa_client2: Running 'pre-boot' VM customizations...
+==> ipa_client2: Booting VM...
+==> ipa_client2: Waiting for machine to boot. This may take a few minutes...
+    ipa_client2: SSH address: 127.0.0.1:2201
+    ipa_client2: SSH username: vagrant
+    ipa_client2: SSH auth method: private key
+    ipa_client2: 
+    ipa_client2: Vagrant insecure key detected. Vagrant will automatically replace
+    ipa_client2: this with a newly generated keypair for better security.
+    ipa_client2: 
+    ipa_client2: Inserting generated public key within guest...
+    ipa_client2: Removing insecure key from the guest if it's present...
+    ipa_client2: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> ipa_client2: Machine booted and ready!
+==> ipa_client2: Checking for guest additions in VM...
+==> ipa_client2: Setting hostname...
+==> ipa_client2: Configuring and enabling network interfaces...
+==> ipa_client2: Installing rsync to the VM...
+==> ipa_client2: Rsyncing folder: /home/buravtsovps/OTUS/module3/LDAP/HWLDAP/ => /vagrant
+==> ipa_client2: Running provisioner: ansible...
+    ipa_client2: Running ansible-playbook...
+
+PLAY [Base set up] *************************************************************
+
+TASK [Gathering Facts] *********************************************************
+[WARNING]: Platform linux on host ipa_client2 is using the discovered Python
+interpreter at /usr/bin/python, but future installation of another Python
+interpreter could change the meaning of that path. See https://docs.ansible.com
+/ansible/2.10/reference_appendices/interpreter_discovery.html for more
+information.
+ok: [ipa_client2]
+[WARNING]: Platform linux on host ipa_server is using the discovered Python
+interpreter at /usr/bin/python, but future installation of another Python
+interpreter could change the meaning of that path. See https://docs.ansible.com
+/ansible/2.10/reference_appendices/interpreter_discovery.html for more
+information.
+ok: [ipa_server]
+[WARNING]: Platform linux on host ipa_client1 is using the discovered Python
+interpreter at /usr/bin/python, but future installation of another Python
+interpreter could change the meaning of that path. See https://docs.ansible.com
+/ansible/2.10/reference_appendices/interpreter_discovery.html for more
+information.
+ok: [ipa_client1]
+
+TASK [install softs on CentOS] *************************************************
+changed: [ipa_server]
+changed: [ipa_client1]
+changed: [ipa_client2]
+
+TASK [disable firewalld] *******************************************************
+ok: [ipa_server]
+ok: [ipa_client1]
+ok: [ipa_client2]
+
+TASK [disable SElinux] *********************************************************
+[WARNING]: SELinux state temporarily changed from 'enforcing' to 'permissive'.
+State change will take effect next reboot.
+changed: [ipa_server]
+changed: [ipa_client2]
+changed: [ipa_client1]
+
+TASK [disable SElinux now] *****************************************************
+changed: [ipa_client1]
+changed: [ipa_server]
+changed: [ipa_client2]
+
+TASK [Set up timezone] *********************************************************
+changed: [ipa_server]
+changed: [ipa_client1]
+changed: [ipa_client2]
+
+TASK [enable chrony] ***********************************************************
+changed: [ipa_server]
+changed: [ipa_client1]
+changed: [ipa_client2]
+
+TASK [change /etc/hosts] *******************************************************
+changed: [ipa_server]
+changed: [ipa_client1]
+changed: [ipa_client2]
+
+PLAY [Config IPA Server] *******************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [ipa_server]
+
+TASK [Upgrade nss] *************************************************************
+changed: [ipa_server]
+
+TASK [install packages] ********************************************************
+changed: [ipa_server]
+
+TASK [configure freeipa] *******************************************************
+changed: [ipa_server]
+
+PLAY [Config Clients] **********************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [ipa_client2]
+ok: [ipa_client1]
+
+TASK [Upgrade nss client] ******************************************************
+changed: [ipa_client2]
+changed: [ipa_client1]
+
+TASK [install module ipa-client] ***********************************************
+changed: [ipa_client2]
+changed: [ipa_client1]
+
+TASK [configure ipa-client] ****************************************************
+changed: [ipa_client1]
+changed: [ipa_client2]
+
+PLAY RECAP *********************************************************************
+ipa_client1                : ok=12   changed=9    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+ipa_client2                : ok=12   changed=9    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+ipa_server                 : ok=12   changed=9    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+buravtsovps@otus:~/OTUS/module3/LDAP/HWLDAP$ 
+

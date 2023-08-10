@@ -1,0 +1,55 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+    config.vm.define "ipa_server" do |ipa_server|
+        ipa_server.vm.box ="almalinux/9"
+        config.ssh.insert_key = false
+        config.vm.synced_folder ".", "/vagrant", type: "rsync"
+        config.ssh.insert_key = 'false'
+        config.vm.boot_timeout = 600
+
+        ipa_server.vm.host_name = 'ipa.otus.lan'
+        ipa_server.vm.network :private_network, ip: "192.168.57.10"
+        ipa_server.vm.network "forwarded_port", guest: 80, host: 80
+    
+        ipa_server.vm.provider "virtualbox" do |vb|
+          vb.memory = "4096"
+          vb.cpus = 2
+        end
+      end
+    
+    config.vm.define "ipa_client1" do |ipa_client1|
+        config.vm.box = "almalinux/9"
+        config.vm.synced_folder ".", "/vagrant", type: "rsync"
+        config.vm.boot_timeout = 600
+
+        ipa_client1.vm.host_name = 'client1.otus.lan'
+        ipa_client1.vm.network :private_network, ip: "192.168.57.11"
+        ipa_client1.vm.provider :virtualbox do |vb|
+          vb.memory = "2048"
+          vb.cpus = 1
+        end
+      end
+    
+    config.vm.define "ipa_client2" do |ipa_client2|
+        config.vm.box = "almalinux/9"
+        config.vm.synced_folder ".", "/vagrant", type: "rsync"
+        config.vm.boot_timeout = 600
+
+        ipa_client2.vm.host_name = 'client2.otus.lan'
+        ipa_client2.vm.network :private_network, ip: "192.168.57.12"
+        ipa_client2.vm.provider :virtualbox do |vb|
+          vb.memory = "2048"
+          vb.cpus = 1
+        end
+      
+        ipa_client2.vm.provision "ansible" do |ansible|
+          ansible.playbook = "ansible/provision.yml"
+          ansible.become = "true"
+          ansible.limit = "all"
+        end
+      
+      end
+    end
