@@ -18,6 +18,8 @@
 
 [9. bash grep sed awk](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/09-BASH)
 
+[10. Управление процессами](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/10-process)
+
 [11. Ansible](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/11-Ansible)
 
 [12. Docker](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/12-Docker)
