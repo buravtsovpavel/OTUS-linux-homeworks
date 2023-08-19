@@ -142,7 +142,7 @@ office2Server
 
 ![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/network%20laboratory/png/topology%20table.png)
 
-**2. Практическая часть**
+## **2. Практическая часть**
 
 Изучив таблицу топологии сети и Vagrant-стенд из задания, мы можем построить полную схему сети:
 
@@ -170,7 +170,8 @@ office2Server
 
 Пример проверки выхода в Интернет через сервер inetRouter c хоста office1Server:
 
-![]()
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/network%20laboratory/png/traceroute%20office1Server.png)
 
 Пример проверки выхода в Интернет через сервер inetRouter c хоста office2Server:
-(скриншот)
+
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/network%20laboratory/png/traceroute%20office2Server.png)
