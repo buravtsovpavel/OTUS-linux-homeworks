@@ -149,8 +149,8 @@ office2Server
 ![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/network%20laboratory/png/full%20topology.png)
 
 На схеме, мы сразу можем увидеть, что нам потребуется создать дополнительно 2 сети (на схеме обозначены полужирными фиолетовыми линиями):
-Для соединения office1Router c centralRouter
-Для соединения office2Router c centralRouter
+* Для соединения office1Router c centralRouter
+* Для соединения office2Router c centralRouter
 
 На основании этой схемы мы получаем готовый список серверов.
 
