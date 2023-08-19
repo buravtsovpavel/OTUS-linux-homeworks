@@ -32,7 +32,7 @@
 - 192\.168.0.32/28    - office hardware
 - 192\.168.0.64/26    - wifi
 
-(ВСТАВИТЬ КАРТИНКУ ИЗ МЕТОДИЧКИ)
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/network%20laboratory/png/topology.png)
 
 Итого должны получиться следующие сервера:
 
@@ -63,7 +63,7 @@ office2Server
 
 Рекомендуется использовать Vagrant + Ansible для настройки данной схемы.
 
-**1\. Теоретическая часть**
+## **1. Теоретическая часть**
 
 **количество узлов в каждой подсети, включая свободные:**
 
@@ -140,13 +140,13 @@ office2Server
 
 После расчета всех сетей, мы получаем следующую таблицу топологии:
 
-(вставляем таблицу в виде скриншота из методики)
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/network%20laboratory/png/topology%20table.png)
 
 **2. Практическая часть**
 
 Изучив таблицу топологии сети и Vagrant-стенд из задания, мы можем построить полную схему сети:
 
-(вставляем схему из методички)
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/network%20laboratory/png/full%20topology.png)
 
 На схеме, мы сразу можем увидеть, что нам потребуется создать дополнительно 2 сети (на схеме обозначены полужирными фиолетовыми линиями):
 Для соединения office1Router c centralRouter
@@ -154,18 +154,23 @@ office2Server
 
 На основании этой схемы мы получаем готовый список серверов.
 
-Для практической части задания подготовлен Vagrantfile(ссылка) и ansible-playbook (ссылку), который включает маршрутизацию транзитных пакетов на роутерах, отключает маршрут по умолчанию и назначает новый маршрут по умолчанию на всех машинах кроме InetRouter, настраивает роутинг.
+Для практической части задания подготовлен [Vagrantfile](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/network%20laboratory/Vagrantfile) и [ansible-playbook](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/network%20laboratory/ansible/provision.yml), который включает маршрутизацию транзитных пакетов на роутерах, отключает маршрут по умолчанию и назначает новый маршрут по умолчанию на всех машинах кроме InetRouter, настраивает роутинг.
 
 В результате получаем соединённые в сеть офисы согласно логической схеме, интернет-трафик со всех серверов ходит через inetRouter, все сервера видят друг друга (проходит ping), у всех новых серверов отключен дефолт на NAT (eth0), который vagrant поднимает для связи.
 
 В качестве примера пинги с office1Server:
-(скриншот)
+
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/network%20laboratory/png/office1server.png)
 
 Пинг с office2Server до centralServer и наоборот:
-(скриншот)
+
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/network%20laboratory/png/office2server.png)
+
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/network%20laboratory/png/centralServer.png)
 
 Пример проверки выхода в Интернет через сервер inetRouter c хоста office1Server:
-(скриншот)
+
+![]()
 
 Пример проверки выхода в Интернет через сервер inetRouter c хоста office2Server:
 (скриншот)
