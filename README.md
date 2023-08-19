@@ -30,6 +30,8 @@
 
 [15. Rsyslog сервер для сбора логов](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/14-logs)
 
+[16. Архитектура сетей](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/network%20laboratory)
+
 [OSPF](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/OSPF)
 
 [VPN](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/VPN)
