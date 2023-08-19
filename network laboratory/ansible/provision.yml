@@ -1,0 +1,246 @@
+---
+  - name: install packets
+    hosts: all
+    become: true       
+
+    tasks:
+
+      - name: Stop and disable Firewalld
+        systemd:
+          name: firewalld
+          state: stopped
+          enabled: false       
+
+      - name: install nano traceroute
+        yum:
+          name:
+            - nano
+            - traceroute
+          state: present
+          update_cache: true
+
+# InetRouter
+
+  - name: Configuration inetRouter
+    hosts: inetRouter
+    become: true
+
+    tasks:
+    
+      - name: install iptables
+        yum:
+          name:
+            - iptables
+            - iptables-services
+          state: present
+          update_cache: true
+
+      - name: copy iptables config 
+        template:  
+          src: templates/iptables 
+          dest: /etc/sysconfig/iptables 
+          owner: root 
+          group: root 
+          mode: 0600 
+
+      - name: start and enable iptables service 
+        service:  
+          name: iptables 
+          state: restarted 
+          enabled: true
+    
+     
+      - name: set up forward packages across routers
+        sysctl:
+          name: net.ipv4.conf.all.forwarding
+          value: '1'
+          state: present
+
+      - name: Set up route on inetRouter eth1
+        copy:
+          src: templates/inetRouter_route_eth1
+          dest: /etc/sysconfig/network-scripts/route-eth1
+          owner: root
+          group: root
+          mode: 0644
+
+
+      - name: Restart network
+        systemd:
+          name: network
+          state: restarted
+      
+# centralRouter
+
+  - name: Configuration centralRouter
+    hosts: centralRouter
+    become: true
+
+    tasks:
+
+      - name: disable default route
+        lineinfile:
+          dest: /etc/sysconfig/network-scripts/ifcfg-eth0
+          line: DEFROUTE=no
+
+      - name: add default gateway for centralRouter 
+        lineinfile: 
+          dest: /etc/sysconfig/network-scripts/ifcfg-eth1 
+          line: GATEWAY=192.168.255.1
+
+      - name: set up forward packages across routers
+        sysctl:
+          name: net.ipv4.conf.all.forwarding
+          value: '1'
+          state: present
+
+      - name: set up route on centralRouter eth5
+        template: 
+          src: templates/centralRouter_route_eth5
+          dest: /etc/sysconfig/network-scripts/route-eth5
+          owner: root
+          group: root
+          mode: 0644
+
+      - name: set up route on centralRouter eth6
+        template: 
+          src: templates/centralRouter_route_eth6
+          dest: /etc/sysconfig/network-scripts/route-eth6
+          owner: root
+          group: root
+          mode: 0644
+
+      - name: Restart network
+        systemd:
+          name: network
+          state: restarted
+
+
+# centralServer
+
+  - name: Configuration centralServer
+    hosts: centralServer
+    become: true
+
+    tasks:
+      - name: disable default route
+        lineinfile:
+          dest: /etc/sysconfig/network-scripts/ifcfg-eth0
+          line: DEFROUTE=no
+      
+      - name: add default gateway for centralRouter 
+        lineinfile: 
+          dest: /etc/sysconfig/network-scripts/ifcfg-eth1 
+          line: GATEWAY=192.168.0.1
+
+      - name: Restart network
+        systemd:
+          name: network
+          state: restarted
+
+
+
+# office1Router
+
+  - name: Configuration office1Router
+    hosts: office1Router
+    become: true
+
+    tasks:
+      - name: disable default route
+        lineinfile:
+          dest: /etc/sysconfig/network-scripts/ifcfg-eth0
+          line: DEFROUTE=no
+      
+      - name: add default gateway for office1Router 
+        lineinfile: 
+          dest: /etc/sysconfig/network-scripts/ifcfg-eth1 
+          line: GATEWAY=192.168.255.9
+    
+      - name: set up forward packages across routers
+        sysctl:
+          name: net.ipv4.conf.all.forwarding
+          value: '1'
+          state: present
+      
+      - name: Restart network
+        service: 
+          name: network
+          state: restarted
+
+
+# office1Server
+
+  - name: Configuration office1Server
+    hosts: office1Server
+    become: true
+
+    tasks:
+      - name: disable default route
+        lineinfile:
+          dest: /etc/sysconfig/network-scripts/ifcfg-eth0
+          line: DEFROUTE=no
+  
+      - name: add default gateway for office1Server 
+        lineinfile: 
+          dest: /etc/sysconfig/network-scripts/ifcfg-eth1 
+          line: GATEWAY=192.168.2.129
+    
+      - name: Restart network
+        service: 
+          name: network
+          state: restarted
+    
+# office2Router
+
+  - name: Configuration office2Router
+    hosts: office2Router
+    become: true
+
+    tasks:
+      - name: disable default route
+        lineinfile:
+          dest: /etc/sysconfig/network-scripts/ifcfg-eth0
+          line: DEFROUTE=no
+      
+      - name: add default gateway for office2Router 
+        lineinfile: 
+          dest: /etc/sysconfig/network-scripts/ifcfg-eth1 
+          line: GATEWAY=192.168.255.5
+
+      - name: set up forward packages across routers
+        sysctl:
+          name: net.ipv4.conf.all.forwarding
+          value: '1'
+          state: present
+      
+      - name: Restart network
+        service: 
+          name: network
+          state: restarted
+
+
+# office2Server
+
+
+  - name: Configuration office2Server
+    hosts: office2Server
+    become: true
+
+    tasks:
+      - name: disable default route
+        lineinfile:
+          dest: /etc/sysconfig/network-scripts/ifcfg-eth0
+          line: DEFROUTE=no
+      
+      - name: add default gateway for office2Server 
+        lineinfile: 
+          dest: /etc/sysconfig/network-scripts/ifcfg-eth1 
+          line: GATEWAY=192.168.1.1
+
+      - name: Restart network
+        service: 
+          name: network
+          state: restarted
+...
+
