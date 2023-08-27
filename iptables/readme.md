@@ -44,6 +44,8 @@ done
 ![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/iptables/png/knock.png)
 
 
+![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/iptables/png/ssh_inetRouter.png)
+
 
 3.
  * На centralServer удаляем маршрут по умолчанию, устанавливаем в качестве шлюза по умолчанию 192.168.0.1, устанавливаем epel-release, устанавливаем и запускаем nginx, перезапускаем network service.
