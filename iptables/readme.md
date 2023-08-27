@@ -19,7 +19,9 @@ centralRouter может попасть на ssh inetrRouter через knock с
 
 ---
 
-1. К схеме из предыдущего задания ("Архитектура сетей") добавляем inetRouter2, соединённый с centralServer сетью 192.168.255.4/30,
+1.  Подготовлены ![Vagrantfile](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/iptables/Vagrantfile) и ![Ansible-playbook](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/iptables/ansible/provision.yml), который разворачивает конфигурацию схемы в соответствии с текущим заданием.
+
+  К схеме из предыдущего задания ("Архитектура сетей") добавляем inetRouter2, соединённый с centralServer сетью 192.168.255.4/30,
 После запуска машин по изменённому [Vagrantfile](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/iptables/Vagrantfile) получаем следующую схему:
 
 ![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/iptables/png/topology.png)
@@ -55,4 +57,3 @@ done
 
 ![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/iptables/png/curl.png)
 
-Подготовлены ![Vagrantfile](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/iptables/Vagrantfile) и ![Ansible-playbook](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/iptables/ansible/provision.yml), который разворачивает конфигурацию схемы в соответствии с текущим заданием.
