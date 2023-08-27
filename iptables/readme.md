@@ -39,7 +39,7 @@ do
 done
 ```
 
-Для проверки устанавливаем nmap и запускаем скрипт с соответствующими параметрами:
+Для проверки устанавливаем nmap, запускаем скрипт с соответствующими параметрами и пробуем зайти по ssh на inetRouter
 
 ![](https://github.com/buravtsovpavel/OTUS-homeworks/blob/master/iptables/png/knock.png)
 
