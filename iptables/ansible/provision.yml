@@ -1,0 +1,236 @@
+---
+  - name: install packets
+    hosts: all
+    become: true       
+
+    tasks:
+
+      - name: Stop and disable Firewalld
+        systemd:
+          name: firewalld
+          state: stopped
+          enabled: false       
+
+      - name: Install nano traceroute nmap
+        yum:
+          name:
+            - nano
+            - traceroute
+            - nmap
+          state: present
+          update_cache: true
+
+# InetRouter
+
+  - name: Configuration inetRouter
+    hosts: inetRouter
+    become: true
+
+    tasks:
+    
+      - name: Install iptables
+        yum:
+          name:
+            - iptables
+            - iptables-services
+          state: present
+          update_cache: true
+
+      - name: Install epel-release
+        yum:
+          name:
+            - epel-release
+          state: present
+          update_cache: true
+
+      - name: Install Knock Server
+        yum:
+          name:
+            - knock-server
+          state: present
+          update_cache: true
+
+      - name: Copy knockd config
+        template:
+          src: templates/knockd.conf
+          dest: /etc/knockd.conf
+          owner: root
+          group: root
+          mode: 0640      
+
+      - name: Start Knock Server
+        service:
+          name: knockd
+          enabled: true
+          state: started
+
+      - name: set up forward packages across routers
+        sysctl:
+          name: net.ipv4.conf.all.forwarding
+          value: '1'
+          state: present
+
+      - name: Set up route on inetRouter eth1
+        copy:
+          src: templates/inetRouter_route_eth1
+          dest: /etc/sysconfig/network-scripts/route-eth1
+          owner: root
+          group: root
+          mode: 0644
+
+      - name: Restart network
+        systemd:
+          name: network
+          state: restarted
+
+      - name: Copy iptables config 
+        template:  
+          src: templates/iptables_inetRouter 
+          dest: /etc/sysconfig/iptables 
+          owner: root 
+          group: root 
+          mode: 0600 
+
+      - name: Start and enable iptables service 
+        service:  
+          name: iptables 
+          state: restarted 
+          enabled: true
+         
+      
+# centralRouter
+
+  - name: Configuration centralRouter
+    hosts: centralRouter
+    become: true
+
+    tasks:
+
+      - name: Disable default route
+        lineinfile:
+          dest: /etc/sysconfig/network-scripts/ifcfg-eth0
+          line: DEFROUTE=no
+
+      - name: Add default gateway for centralRouter 
+        lineinfile: 
+          dest: /etc/sysconfig/network-scripts/ifcfg-eth1 
+          line: GATEWAY=192.168.255.1
+
+      - name: Set up forward packages across routers
+        sysctl:
+          name: net.ipv4.conf.all.forwarding
+          value: '1'
+          state: present
+
+      - name: Restart network
+        systemd:
+          name: network
+          state: restarted
+
+
+# centralServer
+
+  - name: Configuration centralServer
+    hosts: centralServer
+    become: true
+
+    tasks:
+      - name: Disable default route
+        lineinfile:
+          dest: /etc/sysconfig/network-scripts/ifcfg-eth0
+          line: DEFROUTE=no
+      
+      - name: Add default gateway for centralRouter 
+        lineinfile: 
+          dest: /etc/sysconfig/network-scripts/ifcfg-eth1 
+          line: GATEWAY=192.168.0.1
+
+
+      - name: Install epel-release
+        yum:
+          name:
+           - epel-release
+          state: present
+          update_cache: true
+
+      - name: Install NGINX
+        yum:
+          name:
+           - nginx
+          state: present
+          update_cache: true
+    
+      - name: Start NGINX
+        systemd:
+          name: nginx
+          enabled: true
+          state: started
+
+      - name: Restart network
+        systemd:
+          name: network
+          state: restarted
+
+# inetRouter2
+  - name: Configuration inetRouter2
+    hosts: inetRouter2
+    become: true
+
+    tasks:
+      
+      - name: Disable default route
+        lineinfile:
+          dest: /etc/sysconfig/network-scripts/ifcfg-eth0
+          line: DEFROUTE=no
+      
+      - name: Add default gateway for centralRouter 
+        lineinfile: 
+          dest: /etc/sysconfig/network-scripts/ifcfg-eth1 
+          line: GATEWAY=192.168.255.5
+
+
+      - name: Install iptables
+        yum:
+          name:
+          - iptables
+          - iptables-services
+          state: present
+          update_cache: true
+      
+      - name: Copy iptables config
+        template:
+          src: templates/iptables_inetRouter2
+          dest: /etc/sysconfig/iptables
+          owner: root
+          group: root
+          mode: 0600
+
+      - name: Start and enable iptables
+        systemd:
+          name: iptables
+          state: restarted
+          enabled: true
+
+     
+      - name: Set up forward packages across routers
+        sysctl:
+          name: net.ipv4.conf.all.forwarding
+          value: '1'
+          state: present
+
+     
+     # - name: Set up route on inetRouter eth1
+     #   template:
+     #     src: templates/inetRouter2_route_eth1
+     #     dest: /etc/sysconfig/network-scripts/route-eth1
+     #     owner: root
+     #     group: root
+     #     mode: 0644
+      
+      - name: Restart network
+        systemd:
+          name: network
+          state: restarted
+
+...
+

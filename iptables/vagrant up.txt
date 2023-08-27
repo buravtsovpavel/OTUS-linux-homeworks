@@ -1,0 +1,338 @@
+buravtsovps@otus:~/OTUS/module3/iptables/iptables_new$ vagrant up
+Bringing machine 'inetRouter' up with 'virtualbox' provider...
+Bringing machine 'inetRouter2' up with 'virtualbox' provider...
+Bringing machine 'centralRouter' up with 'virtualbox' provider...
+Bringing machine 'centralServer' up with 'virtualbox' provider...
+==> inetRouter: You assigned a static IP ending in ".1" to this machine.
+==> inetRouter: This is very often used by the router and can cause the
+==> inetRouter: network to not work properly. If the network doesn't work
+==> inetRouter: properly, try changing this IP.
+==> inetRouter: Importing base box 'centos/7'...
+==> inetRouter: Matching MAC address for NAT networking...
+==> inetRouter: You assigned a static IP ending in ".1" to this machine.
+==> inetRouter: This is very often used by the router and can cause the
+==> inetRouter: network to not work properly. If the network doesn't work
+==> inetRouter: properly, try changing this IP.
+==> inetRouter: Checking if box 'centos/7' version '2004.01' is up to date...
+==> inetRouter: There was a problem while downloading the metadata for your box
+==> inetRouter: to check for updates. This is not an error, since it is usually due
+==> inetRouter: to temporary network problems. This is just a warning. The problem
+==> inetRouter: encountered was:
+==> inetRouter: 
+==> inetRouter: The requested URL returned error: 404
+==> inetRouter: 
+==> inetRouter: If you want to check for box updates, verify your network connection
+==> inetRouter: is valid and try again.
+==> inetRouter: Setting the name of the VM: iptables_new_inetRouter_1693134686883_9136
+==> inetRouter: Clearing any previously set network interfaces...
+==> inetRouter: Preparing network interfaces based on configuration...
+    inetRouter: Adapter 1: nat
+    inetRouter: Adapter 2: intnet
+    inetRouter: Adapter 8: hostonly
+==> inetRouter: Forwarding ports...
+    inetRouter: 22 (guest) => 2222 (host) (adapter 1)
+==> inetRouter: Booting VM...
+==> inetRouter: Waiting for machine to boot. This may take a few minutes...
+    inetRouter: SSH address: 127.0.0.1:2222
+    inetRouter: SSH username: vagrant
+    inetRouter: SSH auth method: private key
+    inetRouter: Warning: Connection reset. Retrying...
+    inetRouter: Warning: Connection reset. Retrying...
+    inetRouter: Warning: Connection reset. Retrying...
+    inetRouter: 
+    inetRouter: Vagrant insecure key detected. Vagrant will automatically replace
+    inetRouter: this with a newly generated keypair for better security.
+    inetRouter: 
+    inetRouter: Inserting generated public key within guest...
+    inetRouter: Removing insecure key from the guest if it's present...
+    inetRouter: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> inetRouter: Machine booted and ready!
+==> inetRouter: Checking for guest additions in VM...
+    inetRouter: No guest additions were detected on the base box for this VM! Guest
+    inetRouter: additions are required for forwarded ports, shared folders, host only
+    inetRouter: networking, and more. If SSH fails on this machine, please install
+    inetRouter: the guest additions and repackage the box to continue.
+    inetRouter: 
+    inetRouter: This is not an error message; everything may continue to work properly,
+    inetRouter: in which case you may ignore this message.
+==> inetRouter: Setting hostname...
+==> inetRouter: Configuring and enabling network interfaces...
+==> inetRouter: Rsyncing folder: /home/buravtsovps/OTUS/module3/iptables/iptables_new/ => /vagrant
+==> inetRouter: Running provisioner: shell...
+    inetRouter: Running: inline script
+==> inetRouter: Running provisioner: shell...
+    inetRouter: Running: inline script
+==> inetRouter2: Importing base box 'centos/7'...
+==> inetRouter2: Matching MAC address for NAT networking...
+==> inetRouter2: Checking if box 'centos/7' version '2004.01' is up to date...
+==> inetRouter2: Setting the name of the VM: iptables_new_inetRouter2_1693134801028_14221
+==> inetRouter2: Fixed port collision for 22 => 2222. Now on port 2200.
+==> inetRouter2: Clearing any previously set network interfaces...
+==> inetRouter2: Preparing network interfaces based on configuration...
+    inetRouter2: Adapter 1: nat
+    inetRouter2: Adapter 2: intnet
+    inetRouter2: Adapter 8: hostonly
+==> inetRouter2: Forwarding ports...
+    inetRouter2: 8080 (guest) => 8080 (host) (adapter 1)
+    inetRouter2: 22 (guest) => 2200 (host) (adapter 1)
+==> inetRouter2: Booting VM...
+==> inetRouter2: Waiting for machine to boot. This may take a few minutes...
+    inetRouter2: SSH address: 127.0.0.1:2200
+    inetRouter2: SSH username: vagrant
+    inetRouter2: SSH auth method: private key
+    inetRouter2: Warning: Connection reset. Retrying...
+    inetRouter2: Warning: Remote connection disconnect. Retrying...
+    inetRouter2: Warning: Connection reset. Retrying...
+    inetRouter2: Warning: Connection reset. Retrying...
+    inetRouter2: 
+    inetRouter2: Vagrant insecure key detected. Vagrant will automatically replace
+    inetRouter2: this with a newly generated keypair for better security.
+    inetRouter2: 
+    inetRouter2: Inserting generated public key within guest...
+    inetRouter2: Removing insecure key from the guest if it's present...
+    inetRouter2: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> inetRouter2: Machine booted and ready!
+==> inetRouter2: Checking for guest additions in VM...
+    inetRouter2: No guest additions were detected on the base box for this VM! Guest
+    inetRouter2: additions are required for forwarded ports, shared folders, host only
+    inetRouter2: networking, and more. If SSH fails on this machine, please install
+    inetRouter2: the guest additions and repackage the box to continue.
+    inetRouter2: 
+    inetRouter2: This is not an error message; everything may continue to work properly,
+    inetRouter2: in which case you may ignore this message.
+==> inetRouter2: Setting hostname...
+==> inetRouter2: Configuring and enabling network interfaces...
+==> inetRouter2: Rsyncing folder: /home/buravtsovps/OTUS/module3/iptables/iptables_new/ => /vagrant
+==> inetRouter2: Running provisioner: shell...
+    inetRouter2: Running: inline script
+==> inetRouter2: Running provisioner: shell...
+    inetRouter2: Running: inline script
+==> centralRouter: You assigned a static IP ending in ".1" to this machine.
+==> centralRouter: This is very often used by the router and can cause the
+==> centralRouter: network to not work properly. If the network doesn't work
+==> centralRouter: properly, try changing this IP.
+==> centralRouter: Importing base box 'centos/7'...
+==> centralRouter: Matching MAC address for NAT networking...
+==> centralRouter: You assigned a static IP ending in ".1" to this machine.
+==> centralRouter: This is very often used by the router and can cause the
+==> centralRouter: network to not work properly. If the network doesn't work
+==> centralRouter: properly, try changing this IP.
+==> centralRouter: Checking if box 'centos/7' version '2004.01' is up to date...
+==> centralRouter: Setting the name of the VM: iptables_new_centralRouter_1693134920009_10676
+==> centralRouter: Fixed port collision for 22 => 2222. Now on port 2201.
+==> centralRouter: Clearing any previously set network interfaces...
+==> centralRouter: Preparing network interfaces based on configuration...
+    centralRouter: Adapter 1: nat
+    centralRouter: Adapter 2: intnet
+    centralRouter: Adapter 3: intnet
+    centralRouter: Adapter 4: intnet
+    centralRouter: Adapter 8: hostonly
+==> centralRouter: Forwarding ports...
+    centralRouter: 22 (guest) => 2201 (host) (adapter 1)
+==> centralRouter: Booting VM...
+==> centralRouter: Waiting for machine to boot. This may take a few minutes...
+    centralRouter: SSH address: 127.0.0.1:2201
+    centralRouter: SSH username: vagrant
+    centralRouter: SSH auth method: private key
+    centralRouter: Warning: Connection reset. Retrying...
+    centralRouter: Warning: Connection reset. Retrying...
+    centralRouter: Warning: Connection reset. Retrying...
+    centralRouter: Warning: Remote connection disconnect. Retrying...
+    centralRouter: Warning: Connection reset. Retrying...
+    centralRouter: 
+    centralRouter: Vagrant insecure key detected. Vagrant will automatically replace
+    centralRouter: this with a newly generated keypair for better security.
+    centralRouter: 
+    centralRouter: Inserting generated public key within guest...
+    centralRouter: Removing insecure key from the guest if it's present...
+    centralRouter: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> centralRouter: Machine booted and ready!
+==> centralRouter: Checking for guest additions in VM...
+    centralRouter: No guest additions were detected on the base box for this VM! Guest
+    centralRouter: additions are required for forwarded ports, shared folders, host only
+    centralRouter: networking, and more. If SSH fails on this machine, please install
+    centralRouter: the guest additions and repackage the box to continue.
+    centralRouter: 
+    centralRouter: This is not an error message; everything may continue to work properly,
+    centralRouter: in which case you may ignore this message.
+==> centralRouter: Setting hostname...
+==> centralRouter: Configuring and enabling network interfaces...
+==> centralRouter: Rsyncing folder: /home/buravtsovps/OTUS/module3/iptables/iptables_new/ => /vagrant
+==> centralRouter: Running provisioner: shell...
+    centralRouter: Running: inline script
+==> centralRouter: Running provisioner: shell...
+    centralRouter: Running: inline script
+==> centralServer: Importing base box 'centos/7'...
+==> centralServer: Matching MAC address for NAT networking...
+==> centralServer: Checking if box 'centos/7' version '2004.01' is up to date...
+==> centralServer: Setting the name of the VM: iptables_new_centralServer_1693135052892_17811
+==> centralServer: Fixed port collision for 22 => 2222. Now on port 2202.
+==> centralServer: Clearing any previously set network interfaces...
+==> centralServer: Preparing network interfaces based on configuration...
+    centralServer: Adapter 1: nat
+    centralServer: Adapter 2: intnet
+    centralServer: Adapter 8: hostonly
+==> centralServer: Forwarding ports...
+    centralServer: 22 (guest) => 2202 (host) (adapter 1)
+==> centralServer: Booting VM...
+==> centralServer: Waiting for machine to boot. This may take a few minutes...
+    centralServer: SSH address: 127.0.0.1:2202
+    centralServer: SSH username: vagrant
+    centralServer: SSH auth method: private key
+    centralServer: Warning: Connection reset. Retrying...
+    centralServer: Warning: Connection reset. Retrying...
+    centralServer: Warning: Connection reset. Retrying...
+    centralServer: 
+    centralServer: Vagrant insecure key detected. Vagrant will automatically replace
+    centralServer: this with a newly generated keypair for better security.
+    centralServer: 
+    centralServer: Inserting generated public key within guest...
+    centralServer: Removing insecure key from the guest if it's present...
+    centralServer: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> centralServer: Machine booted and ready!
+==> centralServer: Checking for guest additions in VM...
+    centralServer: No guest additions were detected on the base box for this VM! Guest
+    centralServer: additions are required for forwarded ports, shared folders, host only
+    centralServer: networking, and more. If SSH fails on this machine, please install
+    centralServer: the guest additions and repackage the box to continue.
+    centralServer: 
+    centralServer: This is not an error message; everything may continue to work properly,
+    centralServer: in which case you may ignore this message.
+==> centralServer: Setting hostname...
+==> centralServer: Configuring and enabling network interfaces...
+==> centralServer: Rsyncing folder: /home/buravtsovps/OTUS/module3/iptables/iptables_new/ => /vagrant
+==> centralServer: Running provisioner: shell...
+    centralServer: Running: inline script
+==> centralServer: Running provisioner: shell...
+    centralServer: Running: inline script
+==> centralServer: Running provisioner: ansible...
+    centralServer: Running ansible-playbook...
+
+PLAY [install packets] *********************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [inetRouter]
+ok: [centralServer]
+ok: [inetRouter2]
+ok: [centralRouter]
+
+TASK [Stop and disable Firewalld] **********************************************
+ok: [inetRouter]
+ok: [centralRouter]
+ok: [inetRouter2]
+ok: [centralServer]
+
+TASK [Install nano traceroute nmap] ********************************************
+changed: [inetRouter]
+changed: [inetRouter2]
+changed: [centralServer]
+changed: [centralRouter]
+
+PLAY [Configuration inetRouter] ************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [inetRouter]
+
+TASK [Install iptables] ********************************************************
+changed: [inetRouter]
+
+TASK [Install epel-release] ****************************************************
+changed: [inetRouter]
+
+TASK [Install Knock Server] ****************************************************
+changed: [inetRouter]
+
+TASK [Copy knockd config] ******************************************************
+changed: [inetRouter]
+
+TASK [Start Knock Server] ******************************************************
+changed: [inetRouter]
+
+TASK [set up forward packages across routers] **********************************
+changed: [inetRouter]
+
+TASK [Set up route on inetRouter eth1] *****************************************
+changed: [inetRouter]
+
+TASK [Restart network] *********************************************************
+changed: [inetRouter]
+
+TASK [Copy iptables config] ****************************************************
+changed: [inetRouter]
+
+TASK [Start and enable iptables service] ***************************************
+changed: [inetRouter]
+
+PLAY [Configuration centralRouter] *********************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [centralRouter]
+
+TASK [Disable default route] ***************************************************
+changed: [centralRouter]
+
+TASK [Add default gateway for centralRouter] ***********************************
+changed: [centralRouter]
+
+TASK [Set up forward packages across routers] **********************************
+changed: [centralRouter]
+
+TASK [Restart network] *********************************************************
+changed: [centralRouter]
+
+PLAY [Configuration centralServer] *********************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [centralServer]
+
+TASK [Disable default route] ***************************************************
+changed: [centralServer]
+
+TASK [Add default gateway for centralRouter] ***********************************
+changed: [centralServer]
+
+TASK [Install epel-release] ****************************************************
+changed: [centralServer]
+
+TASK [Install NGINX] ***********************************************************
+changed: [centralServer]
+
+TASK [Start NGINX] *************************************************************
+changed: [centralServer]
+
+TASK [Restart network] *********************************************************
+changed: [centralServer]
+
+PLAY [Configuration inetRouter2] ***********************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [inetRouter2]
+
+TASK [Disable default route] ***************************************************
+changed: [inetRouter2]
+
+TASK [Add default gateway for centralRouter] ***********************************
+changed: [inetRouter2]
+
+TASK [Install iptables] ********************************************************
+changed: [inetRouter2]
+
+TASK [Copy iptables config] ****************************************************
+changed: [inetRouter2]
+
+TASK [Start and enable iptables] ***********************************************
+changed: [inetRouter2]
+
+TASK [Set up forward packages across routers] **********************************
+changed: [inetRouter2]
+
+TASK [Restart network] *********************************************************
+changed: [inetRouter2]
+
+PLAY RECAP *********************************************************************
+centralRouter              : ok=8    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+centralServer              : ok=10   changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+inetRouter                 : ok=14   changed=11   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+inetRouter2                : ok=11   changed=8    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+buravtsovps@otus:~/OTUS/module3/iptables/iptables_new$ curl -I http://127.0.0.1:8080
