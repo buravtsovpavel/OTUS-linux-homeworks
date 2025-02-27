@@ -32,11 +32,11 @@
 
 [16. Архитектура сетей](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/network%20laboratory)
 
-[OSPF](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/OSPF)
+[17. OSPF](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/OSPF)
 
-[VPN](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/VPN)
+[18. VPN](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/VPN)
 
-[LDAP](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/LDAP)
+[19. LDAP](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/LDAP)
 
-[Сценарии iptables](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/iptables)
+[20. Сценарии iptables](https://github.com/buravtsovpavel/OTUS-homeworks/tree/master/iptables)
 
